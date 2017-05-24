@@ -1,41 +1,11 @@
 ## Welcome to the webpage for _doseR_
 
-*doseR* is bioinformatics software primarily designed for analysis of sex chromosome dosage compensation using RNA-seq data, but the underlying statistical framework can be applied broadly to detect shifts in gene expression among an arbitray number of pre-defined groups of loci.
+*doseR* is bioinformatics software primarily designed for analysis of sex chromosome dosage compensation using RNA-seq data. However, the software package and underlying statistical framework can be applied broadly to detect shifts in gene expression among an arbitray number of pre-defined groups of loci.
 
-The doseR package, implemented in R as part of the bioconductor project, is being developed in the [Walters Lab](http://walterslab.org/) at the University of Kansas. The project is funded by the National Science Foundation (ABI-1661454, beginning September, 2017). The work will be done in close collaboration with [Thomas Hardcastle](http://people.ds.cam.ac.uk/tjh48/) at the University of Cambridge. 
+The *doseR* package, implemented in R as part of the bioconductor project, is being developed in the [Walters Lab](http://walterslab.org/) at the University of Kansas. The project is funded by the National Science Foundation (ABI-1661454, beginning September, 2017). The work will be done in close collaboration with [Thomas Hardcastle](http://people.ds.cam.ac.uk/tjh48/) at the University of Cambridge. 
 
-You can use the [editor on GitHub](https://github.com/WaltersLab/doser/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+The software is currently in early stages of development and not yet ready for public release. Examples of the underlying principle can be found in the following publications:
+* [Walters, J.R., Hardcastle, T.J. & Jiggins, C.D. (2015). Sex Chromosome Dosage Compensation in Heliconius Butterflies: Global yet Still Incomplete? Genome Biology and Evolution, 7, 2545–2559.](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4607515/)
+* [Hardcastle, T.J. & Lewsey, M.G. (2016). Mobile small RNAs and their role in regulating cytosine methylation of DNA. RNA Biology, Vol 13, Issue 11.](http://www.tandfonline.com/doi/abs/10.1080/15476286.2016.1218591)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/WaltersLab/doser/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
