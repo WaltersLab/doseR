@@ -1,4 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to the webpage for _doseR_
+
+*doseR* is bioinformatics software primarily designed for analysis of sex chromosome dosage compensation using RNA-seq data, but the underlying statistical framework can be applied broadly to detect shifts in gene expression among an arbitray number of pre-defined groups of loci.
+
+The doseR package, implemented in R as part of the bioconductor project, is being developed in the [Walters Lab](http://walterslab.org/) at the University of Kansas. The project is funded by the National Science Foundation (ABI-1661454, beginning September, 2017). The work will be done in close collaboration with [Thomas Hardcastle](http://people.ds.cam.ac.uk/tjh48/) at the University of Cambridge. 
 
 You can use the [editor on GitHub](https://github.com/WaltersLab/doser/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
