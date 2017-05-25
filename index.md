@@ -1,4 +1,5 @@
-###  _doseR:_ a Bioconductor package for dosage compensation analysis and much more...
+#  _doseR_ 
+## A software package for dosage compensation analysis and much more...
 
 *doseR* is bioinformatics software primarily designed for analysis of sex chromosome dosage compensation using RNA-seq data. However, the software package and underlying statistical framework can be applied broadly to detect shifts in gene expression among an arbitray number of pre-defined groups of loci.
 
