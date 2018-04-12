@@ -13,10 +13,17 @@ The primary responsibilities of this position are the development, testing, and 
 The ideal candidate will have expertise in R programming and package development, extensive experience with bioinformatics and functional genomics, strong statistical and quantitative skills, a clear record of independent research leading to quality publications, and excellent communication skills. 
 
 ### _Timing and Salary_  
-Initial review of applications will begin April 23, 2018 and continue as long as needed to identify a qualified pool. The anticipated start date is June 18, 2018 or as soon as possible thereafter. The initial appointment is for one year, with the possibility of renewal for an additional year. Annual salary starts at $47,500 for new postdocs and follows the [NIH scale for years of experience](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-17-003.html).
+Initial review of applications will begin April 23, 2018 and continue as long as needed to identify a qualified pool. The anticipated start date will be during summer of 2018. The initial appointment is for one year, with the possibility of renewal for an additional year. Annual salary starts at $47,500 for new postdocs and follows the [NIH scale for years of experience](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-17-003.html).
 
 ### _Lawrence and the University of Kansas_  
-The [University of Kansas](https://www.ku.edu/) is the flagship research university for the state of Kansas and hosts a wide range of research and resources concerning genome biology, including an HPC cluster and sequencing core. The University is located in [Lawrence](https://en.wikipedia.org/wiki/Lawrence,_Kansas), a diverse community with a high quality of life, [vibrant arts and business communities](https://unmistakablylawrence.com/), top ranked schools in the state, and notable outdoor recreation opportunities provided by [Clinton Lake State Park](http://ksoutdoors.com/State-Parks/Locations/Clinton), located adjacent to the city. Lawrence is less than an hour’s drive from both Kansas City and Topeka, providing good access to an [international airport](http://www.flykci.com/), professional sports arenas, major arts venues, and diverse museums. 
+The [University of Kansas](https://www.ku.edu/) is the flagship research university for the state of Kansas and hosts a wide range of research and resources concerning genome biology, including an [HPC cluster](https://crc.ku.edu/) and [sequencing core](https://gsc.ku.edu/). The University is located in [Lawrence](https://en.wikipedia.org/wiki/Lawrence,_Kansas), 
+a diverse community with a high quality of life, [vibrant arts and business communities](https://unmistakablylawrence.com/), 
+top ranked schools in the state, 
+and notable outdoor recreation opportunities provided by [Clinton Lake State Park](http://ksoutdoors.com/State-Parks/Locations/Clinton), 
+located adjacent to the city. Lawrence is less than an hour’s drive from both Kansas City and Topeka, providing good access to an [international airport](http://www.flykci.com/), 
+[professional sports arenas](https://en.wikipedia.org/wiki/Sports_in_Kansas_City), 
+[major arts venues](https://www.visitkc.com/visitors/things-do/arts-and-culture/kansas-citys-performing-arts-venues#sm.000s6m6ay12ileonvtl2i2ztemd9h), 
+and [diverse museums](https://www.tripadvisor.com/Attractions-g44535-Activities-c49-Kansas_City_Missouri.html). 
 
 ### _Application_  
 A complete online application includes a CV, cover letter describing your qualifications for this position, and contact information for three references. For more information and to apply go to [https://employment.ku.edu/staff/11564BR](https://employment.ku.edu/staff/11564BR).  
