@@ -1,5 +1,3 @@
-### [Post-doctoral position now available!](https://walterslab.github.io/doseR/postdoc)
-
 #  _doseR_ 
 ## A software package for dosage compensation analysis and much more...
 
