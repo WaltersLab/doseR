@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="AV" />
+
+<meta name="date" content="2019-01-24" />
+
+<title>doseR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">doseR</h1>
+<h4 class="author"><em>AV</em></h4>
+<h4 class="date"><em>2019-01-24</em></h4>
+
+
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">library</span>(mclust)
+<span class="co">#&gt; Package 'mclust' version 5.4.2</span>
+<span class="co">#&gt; Type 'citation(&quot;mclust&quot;)' for citing this R package in publications.</span>
+<span class="kw">library</span>(doseR)
+<span class="kw">library</span>(edgeR)
+
+<span class="co">#MyVignette</span>
+
+xassetCountrySector &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">'~/doseR/extdata/format.out.Heliconius.LEG'</span>,  <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+  GFF &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">'~/doseR/extdata/gff_parser.out.Heliconius.LEG'</span>,  <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+  gene.chr.match &lt;-<span class="st"> </span>GFF[<span class="kw">match</span>(xassetCountrySector<span class="op">$</span>Gene, GFF<span class="op">$</span>Gene), ]
+  counts.head   &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">round</span>(xassetCountrySector[<span class="dv">3</span><span class="op">:</span><span class="kw">ncol</span>(xassetCountrySector)] ))
+  Groupings &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;X&quot;</span>, <span class="kw">ncol</span>(xassetCountrySector)<span class="op">-</span><span class="dv">2</span> )
+  segLengths &lt;-<span class="st"> </span>xassetCountrySector<span class="op">$</span>Len
+  cd.head &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;countDat&quot;</span>, <span class="dt">data =</span> counts.head, <span class="dt">replicates =</span> <span class="kw">factor</span>(Groupings), <span class="dt">groups =</span> <span class="kw">list</span>(Groupings, Groupings), <span class="dt">annotation =</span> gene.chr.match  )
+  cd.head<span class="op">@</span>rowObservables<span class="op">$</span>seglens =<span class="st"> </span>segLengths
+  <span class="co">#libsizes(cd.head) &lt;-   getLibsizes(cd.head,   estimationType = &quot;edgeR&quot;)</span>
+  <span class="kw">libsizes</span>(cd.head) &lt;-<span class="st">   </span><span class="kw">unname</span>(<span class="kw">getLibsizes2</span>(cd.head,   <span class="dt">estimationType =</span> <span class="st">&quot;edgeR&quot;</span>))
+OBJ &lt;-<span class="st"> </span>cd.head 
+
+<span class="co">#OBJ@replicates&lt;- as.factor(c(&quot;F&quot;,&quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;,&quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;,&quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;,&quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;,&quot;M&quot;, &quot;F&quot;,&quot;F&quot;, &quot;F&quot;, &quot;F&quot;,&quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;,&quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;,&quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;,&quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;,&quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;,&quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;,&quot;M&quot;, &quot;M&quot;))</span>
+OBJ<span class="op">@</span>replicates&lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span> ))
+
+OBJ<span class="op">@</span>RPKM&lt;-<span class="st"> </span><span class="kw">make_RPKM</span>(OBJ)
+
+OBJ<span class="op">@</span>annotation<span class="op">$</span>something &lt;-<span class="st"> </span>(gene.chr.match<span class="op">$</span>Chr <span class="op">==</span><span class="st"> &quot;Z&quot;</span>)
+OBJ<span class="op">@</span>annotation<span class="op">$</span>something[OBJ<span class="op">@</span>annotation<span class="op">$</span>something<span class="op">==</span><span class="ot">TRUE</span>] &lt;-<span class="st"> &quot;Z&quot;</span>
+OBJ<span class="op">@</span>annotation<span class="op">$</span>something[OBJ<span class="op">@</span>annotation<span class="op">$</span>something<span class="op">==</span><span class="ot">FALSE</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(OBJ<span class="op">@</span>annotation<span class="op">$</span>something)] &lt;-<span class="st"> &quot;A&quot;</span>
+
+## Factorized anntoation column input:
+OBJ<span class="op">@</span>annotation<span class="op">$</span>something &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dt">x =</span> OBJ<span class="op">@</span>annotation<span class="op">$</span>something, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;Z&quot;</span>))
+
+<span class="co">#CYD_AB&lt;- OBJ[,c(39,41,43,45,47,49,51,53,55,57)]</span>
+<span class="co">#CYD_HD &lt;- OBJ[,c(40,42,44,46,48,50,52,54,56,58)]</span>
+CYD_AB &lt;-<span class="st"> </span>OBJ
+
+<span class="kw">plotExpr</span>(CYD_AB, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">notch=</span>T, <span class="dt">outline=</span><span class="ot">FALSE</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">mode_mean=</span><span class="ot">FALSE</span>, <span class="dt">LOG2=</span><span class="ot">TRUE</span>, <span class="dt">clusterby_grouping=</span><span class="ot">FALSE</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># REMOVING 28%</span>
+f_CYD_AB &lt;-<span class="st"> </span><span class="kw">dafsFilter</span>(CYD_AB)
+<span class="co">#&gt; Filtering removed 4846 (35.58%) of 13619 total loci.</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotExpr</span>(f_CYD_AB, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">notch=</span>T, <span class="dt">outline=</span><span class="ot">FALSE</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">mode_mean=</span><span class="ot">FALSE</span>, <span class="dt">LOG2=</span><span class="ot">TRUE</span>, <span class="dt">clusterby_grouping=</span><span class="ot">FALSE</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># REMOVING 56%</span>
+f_CYD_AB &lt;-<span class="st"> </span><span class="kw">quantFilter</span>(CYD_AB, <span class="dt">lo.bound=</span><span class="fl">0.2</span>) 
+<span class="co">#&gt; Filtering removed 8346 (61.28%) of 13619 total loci.</span>
+<span class="kw">plotExpr</span>(f_CYD_AB, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">notch=</span>T, <span class="dt">outline=</span><span class="ot">FALSE</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">mode_mean=</span><span class="ot">FALSE</span>, <span class="dt">LOG2=</span><span class="ot">TRUE</span>, <span class="dt">clusterby_grouping=</span><span class="ot">FALSE</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># REMOVING 71%</span>
+f_CYD_AB &lt;-<span class="st"> </span><span class="kw">iqrxFilter</span>(CYD_AB, <span class="dt">iqr_multi =</span> <span class="fl">1.5</span>)
+<span class="co">#&gt; Filtering removed 4314 (31.68%) of 13619 total loci.</span>
+<span class="kw">plotExpr</span>(f_CYD_AB, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">notch=</span>T, <span class="dt">outline=</span><span class="ot">FALSE</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">mode_mean=</span><span class="ot">FALSE</span>, <span class="dt">LOG2=</span><span class="ot">TRUE</span>, <span class="dt">clusterby_grouping=</span><span class="ot">FALSE</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+outlist &lt;-<span class="st"> </span><span class="kw">generateStats</span>(f_CYD_AB, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>, <span class="dt">mode_mean=</span><span class="ot">TRUE</span>)
+<span class="co">#&gt; View output: outlist$kruskal, outlist$summary</span>
+outlist<span class="op">$</span>kruskal
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Kruskal-Wallis rank sum test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  tmp</span>
+<span class="co">#&gt; Kruskal-Wallis chi-squared = 29.776, df = 1, p-value = 4.85e-08</span>
+outlist<span class="op">$</span>summary
+<span class="co">#&gt;                 A          Z</span>
+<span class="co">#&gt; Min.    -4.347405 -4.3005943</span>
+<span class="co">#&gt; 1st Qu.  1.239271  0.5520276</span>
+<span class="co">#&gt; Median   3.273733  2.5927994</span>
+<span class="co">#&gt; Mean     2.845709  2.1606642</span>
+<span class="co">#&gt; 3rd Qu.  4.650548  4.1027150</span>
+<span class="co">#&gt; Max.     9.998927  9.9581222</span>
+
+outlist &lt;-<span class="st"> </span><span class="kw">test_diffs</span>(f_CYD_AB, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>, <span class="dt">mode_mean=</span><span class="ot">TRUE</span>,  <span class="dt">treatment1=</span><span class="st">&quot;M&quot;</span>, <span class="dt">treatment2=</span><span class="st">&quot;F&quot;</span>)
+<span class="co">#&gt; View output: outlist$kruskal, outlist$summary</span>
+outlist<span class="op">$</span>kruskal
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Kruskal-Wallis rank sum test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  tmp</span>
+<span class="co">#&gt; Kruskal-Wallis chi-squared = 62.856, df = 1, p-value = 2.224e-15</span>
+outlist<span class="op">$</span>summary
+<span class="co">#&gt;                    A          Z</span>
+<span class="co">#&gt; Min.     -5.38549237 -3.0970518</span>
+<span class="co">#&gt; 1st Qu.  -0.34020445 -0.1638306</span>
+<span class="co">#&gt; Median   -0.04272496  0.1821460</span>
+<span class="co">#&gt; Mean     -0.06390638  0.1239747</span>
+<span class="co">#&gt; 3rd Qu.   0.24338647  0.4923417</span>
+<span class="co">#&gt; Max.      6.29667655  2.8485001</span>
+<span class="co">#&gt; NA's    477.00000000 27.0000000</span>
+
+<span class="kw">plotRatioBoxes</span>(f_CYD_AB, <span class="dt">treatment1=</span><span class="st">&quot;M&quot;</span>, <span class="dt">treatment2=</span><span class="st">&quot;F&quot;</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">outline=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAASFBMVEUAAAAAADoAAGYAOpAAZrY6ADo6AGY6kNtmAABmADpmZmZmtv+QOgCQ2/+2ZgC225C2///bkDrb////tmb/25D//7b//9v///8PdSzWAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAEgklEQVR4nO3c2VbUQBhFYVREVESR6f3f1AUtLIbVvan0qSGVvW/0Iv1X80mSHmJO7u1gJ72fwOgJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBIWBTlZTL6DsuHo1Bir/h+mdv0HQFoCOOspsAeiotQVKbSxQcmrzcfXW3iJQUQJBAkFbBBrjGHS5exH2LTQu2RBAl1/+7v48jYyLNgLQ7fdfu7/cnP0JjMsmEDQC0POu9bSrlY1LfYgVqNpB+ip5kO74+7aO07xATRcf4hj01JuD9MLDyMRAjcbVW1ug1MYCJaemx813Frs9fzoYf068kp4PaP+71EXjZgS6u9j3InrBOE/zTRefEKjj2gKlNhYoOTU9bsazWHScQG0Xr7L0REAeg5LT1gHUcW2BUhsLlJy6f0qTz6Tpa7WSb93W8RtUClS2+cFHCwSPFggeLRA8eh1ATYcLVPRogeDR6wDyGJRdfD6gI1/6vn1uqwAqugz4SP13QCt4q1F2GfD2gAqvchUIxqWBgtOq7WJFlwFvEKjsMuAtAtV5Fh8ZJhAMWxfQxy4D3jDQB59F8sQs0BxAZW81tgfU961GcJqvpGGaQDBtzrcawSPalG81kpsPcppPDstuLlBqY4GyT6JsnEAwLvxKut4TTWxYY1xNgdTSAqU27DKu3toCpTYWKDk1PS67+MhAC8/M2wFaOM6zWNvFqywtUGrDLuPqrS1QamOBklPT4zzNN118DKDovVwnPItl7+U6H1D4VqUCNW2IY9Bx93Kt2xBA2Xu5ZhsDKDpuxtN8dNzEQJ7Faq9bY/EqS0/0kWudpX03n5zafFy9tWu9ks7eyzXbCEBD38t1DKCB7uV61MUz6zgGeRZru3iVpZc8x+cPPUrHdbyi7N1TiW/4osVAAyUQtI5jUMcEgroBraZOQGV1fCXdeWqXxQVqOq3u1C6LC9R0Wt2pXRYXqOm0ulO7LC5Q02l1p06UQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAUEeg6097v+Ivn/X4ZeDBa7sW1g/o7uLH4cv5Srs9/xmdt6sf0M3Z7z2X6y8MLp9cWD+gq9P7y+Q+cb3nwtsj6wb0cJHR9Z7/dbZoXpUdrCPQA07yh6qzg/UDurt4PO/Efqqbr7lT4qt6Ae3+P1Xsx4LLt4+oF9D/PSJ1mL4KHs1e1wno6TrQ0KknvcO+yLcakECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQNA/Ua+A+KipDwQAAAAASUVORK5CYII=" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">plotRatioDensity</span>(f_CYD_AB, <span class="dt">treatment1=</span><span class="st">&quot;M&quot;</span>, <span class="dt">treatment2=</span><span class="st">&quot;F&quot;</span>, <span class="dt">mode_mean=</span><span class="ot">TRUE</span>, <span class="dt">LOG2=</span><span class="ot">TRUE</span>, <span class="dt">col =</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">groupings=</span><span class="st">&quot;something&quot;</span>)
+<span class="co">#&gt; Current order of levels:  A Z</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+
+<span class="co">#LEG &lt;- OBJ[,c(2,5,8,11,14,17)]</span>
+dm&lt;-<span class="st"> </span><span class="kw">cD.DM</span>(CYD_AB)
+<span class="co">#&gt; Checking for duplicate columns...</span>
+<span class="co">#&gt; ........done!</span>
+<span class="co">#&gt; Column:  Gene is a duplicate; removing this column </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Column names; these and only these may be used to define formulae for the glSeq function.</span>
+<span class="co">#&gt; rowID</span>
+<span class="co">#&gt; data</span>
+<span class="co">#&gt; sample</span>
+<span class="co">#&gt; replicate</span>
+<span class="co">#&gt; seglens</span>
+<span class="co">#&gt; Chr</span>
+<span class="co">#&gt; something</span>
+<span class="co">#&gt; libsizes</span>
+<span class="co">#glSeq(dm, &quot;-1 + replicate*something&quot;) # TOO SLOW TO RUN EVERY TIME..</span></code></pre></div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
