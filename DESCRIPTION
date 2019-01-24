@@ -1,0 +1,16 @@
+Package: doseR
+Type: Package
+Title: doseR
+Version: 1.1.0
+Author: AV
+Maintainer: AV <avastermark@icloud.com>
+Description: "doseR", next generation sequencing package.
+License: GPL
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: edgeR, methods, stats, utils, graphics, matrixStats, mclust, earth, abind, lme4
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
