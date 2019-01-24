@@ -18,8 +18,6 @@ generateStats <- function (cD, groupings= NULL, mode_mean=TRUE, LOG2=TRUE) {
   }
 
   MyGroups<-cD@annotation[[groupings]]
- # require(matrixStats)
-
 
   RM<- (
     if(mode_mean) rowMeans(cD@RPKM) else matrixStats::rowMedians(cD@RPKM)

@@ -12,7 +12,6 @@ require(edgeR)
 #' @slot nullPosts Contains nullPosts data.
 #' @slot cellObservables Contains cellObservables data.
 
-
 setClass("countDat", representation(data = "array", RPKM = "array", replicates = "factor", groups = "list", rowObservables = "list", sampleObservables = "list", annotation = "data.frame" , orderings = "data.frame", nullPosts = "matrix" , cellObservables = "list" ))
 
 #' libsizes method for testClass
@@ -123,8 +122,6 @@ setMethod("libsizes", signature = "countDat", function(x) {
 #' @param ... Passthrough arguments.
 #' @param drop Value, Logical.
 
-
-
 setMethod("[", "countDat", function(x, i, j, ..., drop = FALSE) {
   if(missing(j)) {
     j <- 1:ncol(x@data)
@@ -145,11 +142,6 @@ setMethod("[", "countDat", function(x, i, j, ..., drop = FALSE) {
         x@groups <- newgroups[!duplicated(newgroups) | duplicated(x@groups)]
       }
 
-     # if(length(x@posteriors) > 0)
-    #  {
-    #    warning("Selection of samples (columns) will invalidate the values calculated in slot 'posteriors', and so these will be discarded.")
-    #    x@posteriors <- matrix(nrow = 0, ncol = 0)
-    #  }
       if(length(x@orderings) > 0)
       {
         warning("Selection of samples (columns) will invalidate the values calculated in slot 'orderings', and so these will be discarded.")
@@ -168,8 +160,6 @@ setMethod("[", "countDat", function(x, i, j, ..., drop = FALSE) {
   x@RPKM <- .sliceArray2(list(i, j), x@RPKM)
 
   x@annotation <- x@annotation[i,, drop = FALSE]
-#  if(nrow(x@posteriors) > 0)
-#    x@posteriors <- x@posteriors[i,, drop = FALSE]
   if(nrow(x@orderings) > 0)
     x@orderings <- x@orderings[i,, drop = FALSE]
   if(length(x@nullPosts) > 0)
@@ -246,25 +236,6 @@ setMethod("show", "countDat", function(object) {
     cat(paste(nrow(object) - 5), "more rows...\n")
   } else print(object@annotation)
 
-#  if(nrow(object@posteriors) > 0)
-#  {
-#    cat('Slot "posteriors":\n')
-#    if(nrow(object@posteriors) > 5)
-#    {
-#      print(exp(object@posteriors[1:5,]))
-#      cat(paste(nrow(object) - 5), "more rows...\n")
-#    } else print(exp(object@posteriors))
-#  }
- # if(length(object@estProps) > 0)
-#  {
-#    cat('\nSlot "estProps":\n')
-#    print(object@estProps)
-#  }
-#  if(length(object@priorType) > 1)
-#  {
-#    cat('Slot "priors":\n')
-#    cat(paste('Priors are of type:', object@priorType), '\n')
-#  }
 })
 
 ########################
@@ -328,7 +299,6 @@ setMethod("initialize", "countDat", function(.Object, ..., data, replicates, lib
   if(!missing(data) && is.list(data)) .Object@data <- array(do.call("c", data), c(dim(data[[1]]), length(data)))
   if(missing(replicates)) replicates <- .Object@replicates
   .Object@replicates <- as.factor(replicates)
- # if(!missing(densityFunction) && inherits(densityFunction, "densityFunction")) densityFunction(.Object) <- list(densityFunction)
 
   if(length(dim(.Object@data)) == 1) .Object@data <- array(.Object@data, dim = c(dim(.Object@data), max(c(0, length(replicates), length(.Object@replicates)))))
 
@@ -340,19 +310,10 @@ setMethod("initialize", "countDat", function(.Object, ..., data, replicates, lib
   if(any(lapply(.Object@groups, length) != ncol(.Object@data)))
     stop("All vectors in '@groups' slot must equal number of columns of '@data' slot.")
 
-#  if(ncol(.Object@posteriors) != length(.Object@groups) & ncol(.Object@posteriors) != 0)
-#    stop("Number of columns in '@posteriors' slot must equal length of '@groups' slot.")
-
-#  if(length(.Object@densityFunction) > 1 & length(.Object@densityFunction) != length(.Object@groups))
-#    stop("Length of list of densityFunctions in '@densityFunction' slot must be 1 or equal to the length of the '@groups' slot.")
-
   if(length(.Object@nullPosts) != 0) {
     if(nrow(.Object@nullPosts) != nrow(.Object@data) & nrow((.Object@nullPosts) != 0))
       stop("Number of rows in '@data' slot must equal number of rows of '@nullPosts' slot.")
   } else nullPosts <- matrix(ncol = 0, nrow = nrow(.Object@data))
-
-  #if(length(.Object@estProps) != length(.Object@groups) & length(.Object@estProps) != 0)
-  #  stop("Length of '@estProps' slot must equal length of '@groups' slot.")
 
   .Object@groups <- lapply(.Object@groups, as.factor)
 
@@ -397,14 +358,12 @@ setMethod("initialize", "countDat", function(.Object, ..., data, replicates, lib
   .Object
 })
 
-
 #' replicates method for testClass
 #'
 #' @docType methods
 #' @rdname replicates-methods
 #' @param x Value
 #' @param value Value
-
 
 setGeneric("groups<-", function(x, value) standardGeneric("groups<-"))
 
@@ -413,7 +372,6 @@ setGeneric("groups<-", function(x, value) standardGeneric("groups<-"))
 #' @docType methods
 #' @rdname replicates-methods
 #' @keywords internal
-
 
 setMethod("groups<-", signature = "countDat", function(x, value) {
   if(any(sapply(value, length) != ncol(x))) stop(paste(sum(sapply(value, length) != ncol(x)), "vector(s) in the groups structure are the wrong length."))

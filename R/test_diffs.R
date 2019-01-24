@@ -30,7 +30,6 @@ test_diffs <- function (cD, groupings= NULL, treatment1=NULL, treatment2=NULL, m
   }
 
   MyGroups<-cD@annotation[[groupings]]
-  #require(matrixStats)
 
   RM<- (
     if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==treatment1]) else matrixStats::rowMedians(cD@RPKM[,cD@replicates==treatment1])

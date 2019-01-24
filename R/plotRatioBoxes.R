@@ -15,9 +15,6 @@
 
 plotRatioBoxes <- function (cD, groupings= NULL, treatment1=NULL, treatment2=NULL,  mode_mean=TRUE, LOG2=TRUE, ...) {
 
-  #utils::globalVariables(c("."))
- # require(matrixStats)
-
   MyGroups<-cD@annotation[[groupings]]
 
   if(is.null(groupings)) {

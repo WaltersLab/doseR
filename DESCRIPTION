@@ -1,7 +1,7 @@
 Package: doseR
 Type: Package
 Title: doseR
-Version: 1.1.0
+Version: 1.2.0
 Author: AV
 Maintainer: AV <avastermark@icloud.com>
 Description: "doseR", next generation sequencing package.

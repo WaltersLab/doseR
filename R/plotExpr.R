@@ -13,9 +13,6 @@
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
-## Factorized anntoation column input:
-## cD@annotation$something <- factor(x = cD@annotation$something, levels = c("X", "e"))
-
 plotExpr <- function (cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@replicates), LOG2=TRUE, clusterby_grouping=TRUE, ...) {
 
   MyGroups<-cD@annotation[[groupings]]
@@ -31,8 +28,6 @@ plotExpr <- function (cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@r
     stop ('Some treatment not in levels(cD@replicates), please check...')
     return (NULL)
   }
-
-#  require(matrixStats)
 
   MyLabels<-NULL
   PLOT <- NULL

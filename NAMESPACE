@@ -1,14 +1,8 @@
 exportPattern("^[[:alpha:]]+")
 
-#importFrom("lme4")
 importFrom("graphics", "boxplot", "lines", "matplot", "plot")
     importFrom("methods", "callNextMethod", "new")
     importFrom("stats", "density", "kruskal.test", "ks.test", "median",
                "na.omit", "quantile")
     importFrom("graphics", "abline", "legend")
     importFrom("stats", "formula", "poisson")
-
-    #importFrom("edgeR")
-#S3method(calcNormFactors,DGEList)
-#S3method(calcNormFactors,default)
-

@@ -31,8 +31,6 @@ plotRatioDensity <- function (cD, groupings= NULL, treatment1=NULL, treatment2=N
     return (NULL)
   }
 
- # require(matrixStats)
-
   if ( is.factor(MyGroups) ) { MyGroups <- droplevels(MyGroups) }
 
   RM <- (

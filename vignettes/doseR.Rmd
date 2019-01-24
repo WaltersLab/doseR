@@ -23,66 +23,61 @@ library(mclust)
 library(doseR)
 library(edgeR)
 
-#MyVignette
-
 xassetCountrySector <- read.table('~/doseR/extdata/format.out.Heliconius.LEG',  sep="\t", header=TRUE, as.is=TRUE)
-  GFF <- read.table('~/doseR/extdata/gff_parser.out.Heliconius.LEG',  sep="\t", header=TRUE, as.is=TRUE)
-  gene.chr.match <- GFF[match(xassetCountrySector$Gene, GFF$Gene), ]
-  counts.head   <- as.matrix(round(xassetCountrySector[3:ncol(xassetCountrySector)] ))
-  Groupings <- rep("X", ncol(xassetCountrySector)-2 )
-  segLengths <- xassetCountrySector$Len
-  cd.head <- new("countDat", data = counts.head, replicates = factor(Groupings), groups = list(Groupings, Groupings), annotation = gene.chr.match  )
-  cd.head@rowObservables$seglens = segLengths
-  #libsizes(cd.head) <-   getLibsizes(cd.head,   estimationType = "edgeR")
-  libsizes(cd.head) <-   unname(getLibsizes2(cd.head,   estimationType = "edgeR"))
-OBJ <- cd.head 
+GFF <- read.table('~/doseR/extdata/gff_parser.out.Heliconius.LEG',  sep="\t", header=TRUE, as.is=TRUE)
+gene.chr.match <- GFF[match(xassetCountrySector$Gene, GFF$Gene), ]
 
-#OBJ@replicates<- as.factor(c("F","F", "F", "M", "M", "M","M", "M", "M", "M", "M","M", "F", "F", "F", "F","F", "F", "F", "F", "M","M", "F","F", "F", "F","M", "M", "F", "F", "F","F", "M", "M", "M", "M","M", "M", "M", "M", "F","F", "F", "F", "M", "M","M", "M", "F", "F", "F","F", "F", "F", "M", "M","M", "M"))
-OBJ@replicates<- as.factor(c("F","M","M","M","F","F" ))
+counts.leg   <- as.matrix(round(xassetCountrySector[3:ncol(xassetCountrySector)] ))
+Groupings <- rep("X", ncol(xassetCountrySector)-2 )
+segLengths <- xassetCountrySector$Len
+cd.leg <- new("countDat", data = counts.leg, replicates = factor(Groupings), groups = list(Groupings, Groupings), annotation = gene.chr.match  )
+cd.leg@rowObservables$seglens = segLengths
+libsizes(cd.leg) <-   unname(getLibsizes2(cd.leg,   estimationType = "edgeR"))
 
-OBJ@RPKM<- make_RPKM(OBJ)
+cd.leg@replicates<- as.factor(c("F","M","M","M","F","F" ))
 
-OBJ@annotation$something <- (gene.chr.match$Chr == "Z")
-OBJ@annotation$something[OBJ@annotation$something==TRUE] <- "Z"
-OBJ@annotation$something[OBJ@annotation$something==FALSE | is.na(OBJ@annotation$something)] <- "A"
+cd.leg@RPKM<- make_RPKM(cd.leg)
+
+cd.leg@annotation$something <- (gene.chr.match$Chr == "Z")
+cd.leg@annotation$something[cd.leg@annotation$something==TRUE] <- "Z"
+cd.leg@annotation$something[cd.leg@annotation$something==FALSE | is.na(cd.leg@annotation$something)] <- "A"
 
 ## Factorized anntoation column input:
-OBJ@annotation$something <- factor(x = OBJ@annotation$something, levels = c("A", "Z"))
+cd.leg@annotation$something <- factor(x = cd.leg@annotation$something, levels = c("A", "Z"))
 
-#CYD_AB<- OBJ[,c(39,41,43,45,47,49,51,53,55,57)]
-#CYD_HD <- OBJ[,c(40,42,44,46,48,50,52,54,56,58)]
-CYD_AB <- OBJ
-
-plotExpr(CYD_AB, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
+plotExpr(cd.leg, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
 
 # REMOVING 28%
-f_CYD_AB <- dafsFilter(CYD_AB)
-plotExpr(f_CYD_AB, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
+f_cd.leg <- dafsFilter(cd.leg)
+plotExpr(f_cd.leg, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
 
 # REMOVING 56%
-f_CYD_AB <- quantFilter(CYD_AB, lo.bound=0.2) 
-plotExpr(f_CYD_AB, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
+f_cd.leg <- quantFilter(cd.leg, lo.bound=0.2) 
+plotExpr(f_cd.leg, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
 
 # REMOVING 71%
-f_CYD_AB <- iqrxFilter(CYD_AB, iqr_multi = 1.5)
-plotExpr(f_CYD_AB, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
+f_cd.leg <- iqrxFilter(cd.leg, iqr_multi = 1.5)
+plotExpr(f_cd.leg, col=c("black","red","black","red"), notch=T, outline=FALSE, cex.axis=0.8, mode_mean=FALSE, LOG2=TRUE, clusterby_grouping=FALSE, groupings="something")
 
-outlist <- generateStats(f_CYD_AB, groupings="something", mode_mean=TRUE)
+outlist <- generateStats(f_cd.leg, groupings="something", mode_mean=TRUE)
 outlist$kruskal
 outlist$summary
 
-outlist <- test_diffs(f_CYD_AB, groupings="something", mode_mean=TRUE,  treatment1="M", treatment2="F")
+outlist <- test_diffs(f_cd.leg, groupings="something", mode_mean=TRUE,  treatment1="M", treatment2="F")
 outlist$kruskal
 outlist$summary
 
-plotRatioBoxes(f_CYD_AB, treatment1="M", treatment2="F", groupings="something", cex.axis=0.8, outline=FALSE)
+plotRatioBoxes(f_cd.leg, treatment1="M", treatment2="F", groupings="something", cex.axis=0.8, outline=FALSE)
 
-plotRatioDensity(f_CYD_AB, treatment1="M", treatment2="F", mode_mean=TRUE, LOG2=TRUE, col =c("black","red"), lty = 1, type = "l", groupings="something")
+plotRatioDensity(f_cd.leg, treatment1="M", treatment2="F", mode_mean=TRUE, LOG2=TRUE, col =c("black","red"), lty = 1, type = "l", groupings="something")
 
+# LIN MODS
+dm<- cD.DM(cd.leg)
 
-#LEG <- OBJ[,c(2,5,8,11,14,17)]
-dm<- cD.DM(CYD_AB)
-#glSeq(dm, "-1 + replicate*something") # TOO SLOW TO RUN EVERY TIME..
+#gl.MF  <-  glSeq(dm, "-1 + replicate")              # TOO SLOW TO RUN EVERY TIME..
+#glZ.MF <-  glSeq(dm, "-1 + something + replicate")  # TOO SLOW TO RUN EVERY TIME..
+#gl.zD  <-  glSeq(dm, "-1 + replicate*something")    # TOO SLOW TO RUN EVERY TIME..
+
 
 ```
 

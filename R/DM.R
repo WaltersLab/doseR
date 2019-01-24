@@ -21,7 +21,7 @@ cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
   }
   cdl <- adjustScaling(cdl)
   dat <- do.call("rbind.data.frame", lapply(1:ncol(cdl@data), function(ii) {
-  #dat <- do.call("rbind.data.frame", lapply(1:10, function(ii) {
+
     dat <- data.frame(rowID = 1:nrow(cdl@data), data = round(cdl@data[,
                                                                  ii]), sample = factor(colnames(cdl@data)[ii], levels = colnames(cdl@data)),
                       replicate = cdl@replicates[ii])
@@ -34,9 +34,7 @@ cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
       for (gg in 1:length(groups(cdl))) dat[, paste("Group:",
                                                     names(groups(cdl))[gg], sep = "")] <- groups(cdl)[[gg]][ii]
       dat <- cbind(dat, cdl@annotation)
-     # if (weightByLL & nrow(cdl@locLikelihoods) > 0)
-      #  dat$weights <- exp(cdl@locLikelihoods[match(cdl@replicates[ii],
-       #                                             levels(cdl@replicates))])
+
       dat
   }))
   if (length(cdl@sampleObservables) > 0)
@@ -45,7 +43,7 @@ cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
   dat <- dat[!is.na(dat[, 1]), , drop = FALSE]
   message("Checking for duplicate columns...", appendLF = FALSE)
   dupCols <- c(FALSE, sapply(2:ncol(dat), function(ii) {
-  #dupCols <- c(FALSE, sapply(2:10, function(ii) {
+
     message(".", appendLF = FALSE)
     any(sapply(1:(ii - 1), function(jj) sum(diag(table(dat[,
                                                            jj], dat[, ii]))) == nrow(dat)))

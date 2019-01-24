@@ -8,11 +8,7 @@
 #' @author AJ Vaestermark, JR Walters.
 #' @references BMC Bioinformatics, 2014, 15:92
 
-
-
 dafsFilter <- function(cD, PLOT=TRUE) {
-
-  #utils::globalVariables(dafsFilter)
 
   VEC1 <- rowMeans(cD@RPKM)
 

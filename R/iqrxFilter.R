@@ -13,7 +13,7 @@
 iqrxFilter <- function(cD, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE) {
 
   if(MEDIAN) {
-    #require(matrixStats)
+
     rpkm <- log2(matrixStats::rowMedians( cD@RPKM, na.rm = na.rm))
   } else {
     rpkm <- log2(rowMeans( cD@RPKM, na.rm = na.rm ))
