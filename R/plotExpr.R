@@ -1,6 +1,7 @@
 #' @title plotExpr Function to generate a boxplot (expression) for a countDat object based on the replicate data.
 #' @description This function generates a boxplot of FPKM expression values from the supplied countDat object. FPKM values are averaged across replicates and partitioned among groups of loci as specified in a selected column from the annotation slot of the provided countDat object.
-#' @usage plotExpr(cD, groupings, mode_mean, treatment, LOG2, clusterby_grouping, ...)
+#' @usage plotExpr(cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@replicates),
+#'                 LOG2=TRUE, clusterby_grouping=TRUE, ...)
 #' @param cD A countDat object containing FPKM values and at least one annotation column.
 #' @param groupings	Specifies which column in the dataframe of the annotation slot that will be used to group loci in the boxplot. Can provide either a character value matching the column name, or a single numerical value used as an index of dataframe columns.
 #' @param mode_mean Logical. If TRUE then FPKM values are averaged by mean across replicates within treatment. If FALSE, values are averaged by median.
@@ -36,8 +37,8 @@ plotExpr <- function (cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@r
   if ( is.factor(MyGroups) ) { MyGroups <- droplevels(MyGroups) }
   if ( is.factor(cD@replicates) )               { cD@replicates <- droplevels(cD@replicates) }
 
-  Super_ch<- if(clusterby_grouping) unique(MyGroups) else treatment
-  Super_dh<- if(clusterby_grouping) treatment else unique(MyGroups)
+  Super_ch<- if(clusterby_grouping) levels(MyGroups) else treatment # removed unique(MyGroups)
+  Super_dh<- if(clusterby_grouping) treatment else levels(MyGroups) # removed unique(MyGroups)
 
   for (ch in Super_ch) {
     for (dh in Super_dh) {

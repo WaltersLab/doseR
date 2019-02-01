@@ -16,8 +16,6 @@ An S4 class that stores count data.
 
 \item{\code{annotation}}{Contains annotation column data.}
 
-\item{\code{groups}}{Contains groups data.}
-
 \item{\code{replicates}}{Contains replicates data.}
 
 \item{\code{rowObservables}}{Contains rowObservables data, (including seglens).}

@@ -4,14 +4,12 @@
 \alias{cD.DM}
 \title{cD.DM Function to convert count dat object to LME4 input.}
 \usage{
-cD.DM(cD, weightByLL = TRUE, includeGroupStructure = FALSE)
+cD.DM(cD, weightByLL = TRUE)
 }
 \arguments{
 \item{cD}{A countDat object containing FPKM values and at least one annotation column.}
 
 \item{weightByLL}{Logical, weigh by log likelihood score.}
-
-\item{includeGroupStructure}{Logical, include group structure.}
 }
 \value{
 Returns LME4 input.

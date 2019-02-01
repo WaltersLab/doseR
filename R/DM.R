@@ -2,16 +2,15 @@ require(lme4)
 
 #' @title cD.DM Function to convert count dat object to LME4 input.
 #' @description This function generates LME4 input.
-#' @usage cD.DM(cD, weightByLL = TRUE, includeGroupStructure = FALSE)
+#' @usage cD.DM(cD, weightByLL = TRUE)
 #' @param cD A countDat object containing FPKM values and at least one annotation column.
 #' @param weightByLL Logical, weigh by log likelihood score.
-#' @param includeGroupStructure Logical, include group structure.
 #' @details This function converts count dat object.
 #' @return Returns LME4 input.
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
-cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
+cD.DM <- function (cD, weightByLL = TRUE)
 {
   cdl <- cD
   adjustScaling <- function(CD) {
@@ -30,9 +29,7 @@ cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
     if (length(cdl@cellObservables) > 0)
       dat <- cbind(dat, do.call("cbind", lapply(cdl@cellObservables,
                                                 function(x) x[, ii])))
-    if (includeGroupStructure & length(groups(cdl)) > 0)
-      for (gg in 1:length(groups(cdl))) dat[, paste("Group:",
-                                                    names(groups(cdl))[gg], sep = "")] <- groups(cdl)[[gg]][ii]
+
       dat <- cbind(dat, cdl@annotation)
 
       dat
@@ -51,7 +48,7 @@ cD.DM <- function (cD, weightByLL = TRUE, includeGroupStructure = FALSE)
   message("done!")
   if (any(dupCols)) {
     message(paste("Column: ", colnames(dat)[dupCols], "is a duplicate; removing this column \n"))
-    dat <- dat[, !dupCols]
+    #dat <- dat[, !dupCols]
   }
   message("Column names; these and only these may be used to define formulae for the glSeq function.")
   message(paste(colnames(dat), collapse = "\n"))

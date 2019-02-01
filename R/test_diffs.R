@@ -1,6 +1,7 @@
 #' @title test_diffs Statistics function to summarize expression data of a countDat object, using ratios between selected treatments.
 #' @description generateStats is a summary function used on various expression data, using ratios between selected treatments.
-#' @usage test_diffs(cD, groupings, treatment1, treatment2, mode_mean, LOG2)
+#' @usage test_diffs(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+#'                   mode_mean=TRUE, LOG2=TRUE)
 #' @param cD A countDat object.
 #' @param groupings	A grouping (annotation column), e.g. groupings="something".
 #' @param treatment1	Symbol, treatment 1.

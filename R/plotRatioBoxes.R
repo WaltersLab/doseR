@@ -1,6 +1,7 @@
 #' @title plotRatioBoxes Function to boxplot density of ratios between two treatments (using groupings from an annotation column) within a countDat object.
 #' @description This function plots the expression of the supplied countDat object, representing ratios between a pair of selected treatments as a boxplot for each group in the selected annotation column.
-#' @usage plotRatioBoxes(cD, groupings, treatment1, treatment2, mode_mean, LOG2,...)
+#' @usage plotRatioBoxes(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+#'                       mode_mean=TRUE, LOG2=TRUE, ...)
 #' @param cD A countDat object.
 #' @param groupings	A grouping (annotation column), e.g. groupings="something".
 #' @param treatment1	Symbol, treatment 1.

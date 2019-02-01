@@ -4,7 +4,8 @@
 \alias{plotRatioBoxes}
 \title{plotRatioBoxes Function to boxplot density of ratios between two treatments (using groupings from an annotation column) within a countDat object.}
 \usage{
-plotRatioBoxes(cD, groupings, treatment1, treatment2, mode_mean, LOG2,...)
+plotRatioBoxes(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+                      mode_mean=TRUE, LOG2=TRUE, ...)
 }
 \arguments{
 \item{cD}{A countDat object.}

@@ -4,7 +4,8 @@
 \alias{test_diffs}
 \title{test_diffs Statistics function to summarize expression data of a countDat object, using ratios between selected treatments.}
 \usage{
-test_diffs(cD, groupings, treatment1, treatment2, mode_mean, LOG2)
+test_diffs(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+                  mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
 \item{cD}{A countDat object.}

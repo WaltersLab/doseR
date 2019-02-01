@@ -36,7 +36,7 @@ dafs <- function(VEC1, PLOT) {
   }
 
     if(PLOT) {
-    plot(density(log2xx),  main="", xlab="Expression")
+    plot(density(log2xx),  main="", xlab="Expression",cex.axis=2)
 
     lines(vx,vv,col="red")
 

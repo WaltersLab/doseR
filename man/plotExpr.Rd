@@ -4,7 +4,8 @@
 \alias{plotExpr}
 \title{plotExpr Function to generate a boxplot (expression) for a countDat object based on the replicate data.}
 \usage{
-plotExpr(cD, groupings, mode_mean, treatment, LOG2, clusterby_grouping, ...)
+plotExpr(cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@replicates),
+                LOG2=TRUE, clusterby_grouping=TRUE, ...)
 }
 \arguments{
 \item{cD}{A countDat object containing FPKM values and at least one annotation column.}

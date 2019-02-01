@@ -4,7 +4,6 @@ require(edgeR)
 #' @slot data Contains counts data.
 #' @slot RPKM Contains RPKM data.
 #' @slot annotation Contains annotation column data.
-#' @slot groups Contains groups data.
 #' @slot replicates Contains replicates data.
 #' @slot rowObservables Contains rowObservables data, (including seglens).
 #' @slot sampleObservables Contains sampleObservables data.
@@ -12,7 +11,7 @@ require(edgeR)
 #' @slot nullPosts Contains nullPosts data.
 #' @slot cellObservables Contains cellObservables data.
 
-setClass("countDat", representation(data = "array", RPKM = "array", replicates = "factor", groups = "list", rowObservables = "list", sampleObservables = "list", annotation = "data.frame" , orderings = "data.frame", nullPosts = "matrix" , cellObservables = "list" ))
+setClass("countDat", representation(data = "array", RPKM = "array", replicates = "factor", rowObservables = "list", sampleObservables = "list", annotation = "data.frame" , orderings = "data.frame", nullPosts = "matrix" , cellObservables = "list" ))
 
 #' libsizes method for testClass
 #'
@@ -85,7 +84,7 @@ setMethod("libsizes", signature = "countDat", function(x) {
                        edgeR = {
                          if(!("edgeR" %in% loadedNamespaces()))
                            requireNamespace("edgeR", quietly = TRUE)
-                         d <- edgeR::DGEList(counts = data[subset,, drop = FALSE], group = replicates, lib.size = colSums(data, na.rm = TRUE))
+                         d <- edgeR::DGEList(counts = data[subset,, drop = FALSE], lib.size = colSums(data, na.rm = TRUE))
                          d <- edgeR::calcNormFactors(d, ...)
                          d$samples$norm.factors * d$samples$lib.size
                        })
@@ -132,17 +131,7 @@ setMethod("[", "countDat", function(x, i, j, ..., drop = FALSE) {
     {
       replicates(x) <- as.character(x@replicates[j])
 
-      if(length(x@groups) > 0)
-      {
-        newgroups <- list()
-        newgroups <- lapply(x@groups, function(x) {
-          x[j]
-          rep(1:length(unique(x[j])), sapply(unique(x[j]), function(z) sum(x[j] == z)))[unlist(sapply(unique(x[j]), function(z) which(x[j] == z)))]
-        })
-        x@groups <- newgroups[!duplicated(newgroups) | duplicated(x@groups)]
-      }
-
-      if(length(x@orderings) > 0)
+            if(length(x@orderings) > 0)
       {
         warning("Selection of samples (columns) will invalidate the values calculated in slot 'orderings', and so these will be discarded.")
         x@orderings <- data.frame()
@@ -203,42 +192,33 @@ setMethod("replicates<-", signature = "countDat", function(x, value) {
 ######################
 
 setMethod("show", "countDat", function(object) {
-
   cat(paste('An object x of class "', class(object), '"\n', sep = ""))
   cat(paste(nrow(object), 'rows and', ncol(object), 'columns\n'))
-
   cat('\nSlot "replicates"\n')
   cat(as.character(object@replicates))
-
-  cat('\nSlot "groups":\n')
-  print(object@groups)
-
-  cat('\nSlot "data":\n')
-
+    cat('\nSlot "data":\n')
   if(nrow(object@data) > 5)
   {
     print(.showData(.sliceArray2(list(1:5), object@data)), quote = FALSE)
     cat(paste(nrow(object) - 5), "more rows...\n")
   } else print(.showData(object@data))
-
   cat('\nSlot "RPKM":\n')
-
   if(nrow(object@RPKM) > 5)
   {
     print(.showData(.sliceArray2(list(1:5), object@RPKM)), quote = FALSE)
     cat(paste(nrow(object) - 5), "more rows...\n")
   } else print(.showData(object@RPKM))
-
   cat('\nSlot "annotation":\n')
   if(nrow(object@annotation) > 5 & ncol(object@annotation) > 0)
   {
     print(object@annotation[1:5,])
     cat(paste(nrow(object) - 5), "more rows...\n")
   } else print(object@annotation)
-
 })
 
-########################
+
+
+##################
 
 .showData <- function(data)
 {
@@ -307,15 +287,10 @@ setMethod("initialize", "countDat", function(.Object, ..., data, replicates, lib
   if(nrow(.Object@annotation) > 0 & nrow(.Object@annotation) != nrow(.Object@data))
     warning("Number of rows of '@annotation' slot not same as '@data' slot.")
 
-  if(any(lapply(.Object@groups, length) != ncol(.Object@data)))
-    stop("All vectors in '@groups' slot must equal number of columns of '@data' slot.")
-
-  if(length(.Object@nullPosts) != 0) {
+   if(length(.Object@nullPosts) != 0) {
     if(nrow(.Object@nullPosts) != nrow(.Object@data) & nrow((.Object@nullPosts) != 0))
       stop("Number of rows in '@data' slot must equal number of rows of '@nullPosts' slot.")
   } else nullPosts <- matrix(ncol = 0, nrow = nrow(.Object@data))
-
-  .Object@groups <- lapply(.Object@groups, as.factor)
 
   if(!missing(libsizes)) {
     if(is.array(libsizes) && (any(dim(libsizes) != dim(.Object@data)[-1])) || (is.vector(libsizes) & length(libsizes) != ncol(.Object@data)))
@@ -358,42 +333,31 @@ setMethod("initialize", "countDat", function(.Object, ..., data, replicates, lib
   .Object
 })
 
+##########################
+
 #' replicates method for testClass
 #'
 #' @docType methods
-#' @rdname replicates-methods
+#' @rdname nrow-methods
 #' @param x Value
-#' @param value Value
-
-setGeneric("groups<-", function(x, value) standardGeneric("groups<-"))
-
-#' replicates method for testClass
-#'
-#' @docType methods
-#' @rdname replicates-methods
 #' @keywords internal
 
-setMethod("groups<-", signature = "countDat", function(x, value) {
-  if(any(sapply(value, length) != ncol(x))) stop(paste(sum(sapply(value, length) != ncol(x)), "vector(s) in the groups structure are the wrong length."))
-  x@groups <- lapply(value, as.factor)
-  x
+setMethod("nrow", "countDat", function(x) {
+  #cat(paste(nrow(x@data)))
+  nrow(x@data)
 })
 
+##########################
+
 #' replicates method for testClass
 #'
 #' @docType methods
-#' @rdname replicates-methods
+#' @rdname ncol-methods
 #' @param x Value
-#' @param value Value
-
-setGeneric("groups", function(x) standardGeneric("groups"))
-
-#' replicates method for testClass
-#'
-#' @docType methods
-#' @rdname replicates-methods
 #' @keywords internal
 
-setMethod("groups", signature = "countDat", function(x) {
-  x@groups
+setMethod("ncol", "countDat", function(x) {
+  #cat(paste(length(x@replicates)))
+  length(x@replicates)
 })
+

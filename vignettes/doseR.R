@@ -17,7 +17,7 @@ gene.chr.match <- GFF[match(xassetCountrySector$Gene, GFF$Gene), ]
 counts.leg   <- as.matrix(round(xassetCountrySector[3:ncol(xassetCountrySector)] ))
 Groupings <- rep("X", ncol(xassetCountrySector)-2 )
 segLengths <- xassetCountrySector$Len
-cd.leg <- new("countDat", data = counts.leg, replicates = factor(Groupings), groups = list(Groupings, Groupings), annotation = gene.chr.match  )
+cd.leg <- new("countDat", data = counts.leg, replicates = factor(Groupings), annotation = gene.chr.match  )
 cd.leg@rowObservables$seglens = segLengths
 libsizes(cd.leg) <-   unname(getLibsizes2(cd.leg,   estimationType = "edgeR"))
 
