@@ -34,11 +34,22 @@ plotExpr <- function (cD, groupings= NULL, mode_mean=TRUE, treatment=levels(cD@r
   PLOT <- NULL
   NAMES <- NULL
 
-  if ( is.factor(MyGroups) ) { MyGroups <- droplevels(MyGroups) }
+  if ( is.factor(MyGroups) ) { MyGroups <- droplevels(MyGroups)
+
+  Super_ch<- if(clusterby_grouping) levels(MyGroups) else treatment # removed unique(MyGroups) # turned levels back to unique
+  Super_dh<- if(clusterby_grouping) treatment else levels(MyGroups) # removed unique(MyGroups)
+
+  } else {
+
+    Super_ch<- if(clusterby_grouping) unique(MyGroups) else treatment # removed unique(MyGroups) # turned levels back to unique
+    Super_dh<- if(clusterby_grouping) treatment else unique(MyGroups) # removed unique(MyGroups)
+
+
+  }
+
+
   if ( is.factor(cD@replicates) )               { cD@replicates <- droplevels(cD@replicates) }
 
-  Super_ch<- if(clusterby_grouping) levels(MyGroups) else treatment # removed unique(MyGroups)
-  Super_dh<- if(clusterby_grouping) treatment else levels(MyGroups) # removed unique(MyGroups)
 
   for (ch in Super_ch) {
     for (dh in Super_dh) {
