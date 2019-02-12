@@ -21,6 +21,9 @@ libsizes(x)
 
 \item{value}{Value}
 }
+\value{
+libsize
+}
 \description{
 libsizes method for testClass
 
@@ -29,5 +32,8 @@ libsizes method for testClass
 libsizes method for testClass
 
 libsizes method for testClass
+}
+\examples{
+libsizes
 }
 \keyword{internal}

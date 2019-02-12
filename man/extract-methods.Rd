@@ -18,6 +18,9 @@
 
 \item{drop}{Value, Logical.}
 }
+\value{
+subsetted object
+}
 \description{
 subsetting method for countDat class
 }

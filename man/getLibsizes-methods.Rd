@@ -3,10 +3,12 @@
 \docType{methods}
 \name{getLibsizes2}
 \alias{getLibsizes2}
-\title{getLibsizes method for count Dat class, derived from getLibsizes1 method (countData class).}
+\title{getLibsizes method for count Dat class, derived from getLibsizes1
+method (countData class).}
 \usage{
-getLibsizes2(cD, subset = NULL, estimationType = c("quantile", "total",
-  "edgeR"), quantile = 0.75, ...)
+getLibsizes2(cD, subset = NULL,
+estimationType = c("quantile", "total",
+"edgeR"),quantile = 0.75, ...)
 }
 \arguments{
 \item{cD}{A count Dat object.}
@@ -19,6 +21,22 @@ getLibsizes2(cD, subset = NULL, estimationType = c("quantile", "total",
 
 \item{...}{Passthrough arguments.}
 }
+\value{
+Libsize value
+}
 \description{
-getLibsizes method for count Dat class, derived from getLibsizes1 method (countData class).
+getLibsizes method for count Dat class, derived from getLibsizes1
+method (countData class).
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,replicates=reps,
+seglens=hm.tr,annotation=annotxn)
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+getLibsizes2(hm)
+
 }

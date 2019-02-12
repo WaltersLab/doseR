@@ -10,6 +10,9 @@
 \arguments{
 \item{x}{Value}
 }
+\value{
+length(x@replicates)
+}
 \description{
 replicates method for testClass
 }

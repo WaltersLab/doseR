@@ -9,8 +9,23 @@ make_RPKM(cd_object)
 \arguments{
 \item{cd_object}{A countDat object.}
 }
+\value{
+RPKM populated object
+}
 \description{
-make_RPKM populates RPKM slot of modified countData (countDat) S4 object.
+make_RPKM populates RPKM slot of modified countData (countDat)
+S4 object.
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hmtr <- hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,replicates=reps,seglens=hmtr,
+annotation=annotxn)
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
 }
 \references{
 The "doseR" package, 2018 (in press).

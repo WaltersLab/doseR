@@ -2,10 +2,12 @@
 % Please edit documentation in R/plotRatioDensity.R
 \name{plotRatioDensity}
 \alias{plotRatioDensity}
-\title{plotRatioDensity Function to plot density of ratios between two treatments (using groupings from an annotation column) within a countDat object.}
+\title{plotRatioDensity Function to plot density of ratios between two
+treatments (using groupings from an annotation column) within a countDat
+object.}
 \usage{
-plotRatioDensity(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
-                        mode_mean=TRUE, LOG2=TRUE,...)
+plotRatioDensity(cD, groupings= NULL, treatment1=NULL,
+treatment2=NULL, mode_mean=TRUE, LOG2=TRUE,...)
 }
 \arguments{
 \item{cD}{A countDat object.}
@@ -20,16 +22,38 @@ plotRatioDensity(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
 
 \item{LOG2}{Boolean, Calculate LOG2.}
 
-\item{...}{Passthrough arguments to boxplot (additional arguments affecting the summary produced).}
+\item{...}{Passthrough arguments to boxplot (additional arguments affecting
+the summary produced).}
 }
 \value{
-Returns an invisible data frame containing the x-values and corresponding density for each applicable annotation column entry.
+Returns an invisible data frame containing the x-values and
+corresponding density for each applicable annotation column entry.
 }
 \description{
-This function plots the expression of the supplied countDat object, using ratios between a pair of selected treatments.
+This function plots the expression of the supplied countDat
+object, using ratios between a pair of selected treatments.
 }
 \details{
-This function plots expression of the supplied countDat object using ratios of treatment1/treatment2.
+This function plots expression of the supplied countDat object
+using ratios of treatment1/treatment2.
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+annotxn$ZA <- factor(ifelse(hmel.dat$chromosome == 21, "Z", "A"),
+levels = c("A", "Z"))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+annotation=annotxn)
+replicates(hm) <- reps
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
+plotRatioDensity(hm, groupings='ZA', treatment1 = 'Male',
+treatment2 = 'Female',lty=1,type="l")
+
+
 }
 \references{
 The "doseR" package, 2018 (in press).

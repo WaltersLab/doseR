@@ -2,7 +2,8 @@
 % Please edit documentation in R/generateStats.R
 \name{generateStats}
 \alias{generateStats}
-\title{generateStats	Statistics function to summarize expression data of a countDat object.}
+\title{generateStats Statistics function to summarize expression
+data of a countDat object.}
 \usage{
 generateStats(cD, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
 }
@@ -16,13 +17,30 @@ generateStats(cD, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
 \item{LOG2}{Boolean, Calculate LOG2.}
 }
 \value{
-Returns an invisible list of summary statistics, kruskal test and raw data of a countDat object.
+Returns an invisible list of summary statistics, kruskal test
+and raw data of a countDat object.
 }
 \description{
-generateStats is a summary function used on various expression data.
+generateStats is a summary function used on various
+expression data.
 }
 \details{
-This function completes summary statistics of the expression of the supplied countDat object.
+This function completes summary statistics of the expression
+of the supplied countDat object.
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+annotation=annotxn)
+replicates(hm) <- reps
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
+generateStats(hm, groupings='Chromosome')
+
 }
 \references{
 The "doseR" package, 2018 (in press).

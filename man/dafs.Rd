@@ -11,11 +11,33 @@ dafs(VEC1, PLOT)
 
 \item{PLOT}{Boolean, toggles plotting.}
 }
+\value{
+Returns vx[which.min(vv)] to wrapper function.
+}
 \description{
-This function filters the expression using DAFS (see ref). This is a core function invoked by the DAFS wrapper.
+This function filters the expression using DAFS (see ref).
+This is a core function invoked by the DAFS wrapper.
 }
 \details{
-This function filters the expression, using Data Adaptive Flag method.
+This function filters the expression, using
+Data Adaptive Flag method.
+}
+\examples{
+
+library(mclust)
+library(edgeR)
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+annotation=annotxn)
+replicates(hm) <- reps
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
+f_hm <- dafsFilter(hm)
+
 }
 \references{
 BMC Bioinformatics, 2014, 15:92

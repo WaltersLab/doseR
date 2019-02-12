@@ -10,6 +10,9 @@
 \arguments{
 \item{x}{Value}
 }
+\value{
+nrow(x@data)
+}
 \description{
 replicates method for testClass
 }

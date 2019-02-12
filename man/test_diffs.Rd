@@ -2,10 +2,11 @@
 % Please edit documentation in R/test_diffs.R
 \name{test_diffs}
 \alias{test_diffs}
-\title{test_diffs Statistics function to summarize expression data of a countDat object, using ratios between selected treatments.}
+\title{test_diffs Statistics function to summarize expression
+data of a countDat object, using ratios between selected treatments.}
 \usage{
 test_diffs(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
-                  mode_mean=TRUE, LOG2=TRUE)
+mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
 \item{cD}{A countDat object.}
@@ -21,13 +22,32 @@ test_diffs(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
 \item{LOG2}{Boolean, Calculate LOG2.}
 }
 \value{
-Returns an invisible list of summary statistics, kruskal test and raw data of a countDat object, using ratios between selected treatments.
+Returns an invisible list of summary statistics,
+kruskal test and raw data of a countDat object, using ratios
+between selected treatments.
 }
 \description{
-generateStats is a summary function used on various expression data, using ratios between selected treatments.
+generateStats is a summary function used on various
+expression data, using ratios between selected treatments.
 }
 \details{
-This function completes summary statistics of the expression of the supplied countDat object.
+This function completes summary statistics of the expression of
+the supplied countDat object.
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+annotation=annotxn)
+replicates(hm) <- reps
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
+test_diffs(hm, groupings='Chromosome',treatment1="Male",
+treatment2="Female" )
+
 }
 \references{
 The "doseR" package, 2018 (in press).

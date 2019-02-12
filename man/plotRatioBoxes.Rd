@@ -2,10 +2,12 @@
 % Please edit documentation in R/plotRatioBoxes.R
 \name{plotRatioBoxes}
 \alias{plotRatioBoxes}
-\title{plotRatioBoxes Function to boxplot density of ratios between two treatments (using groupings from an annotation column) within a countDat object.}
+\title{plotRatioBoxes Function to boxplot density of ratios
+between two treatments (using groupings from an annotation column)
+within a countDat object.}
 \usage{
 plotRatioBoxes(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
-                      mode_mean=TRUE, LOG2=TRUE, ...)
+mode_mean=TRUE, LOG2=TRUE, ...)
 }
 \arguments{
 \item{cD}{A countDat object.}
@@ -20,16 +22,36 @@ plotRatioBoxes(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
 
 \item{LOG2}{Boolean, Calculate LOG2.}
 
-\item{...}{Passthrough arguments to boxplot (additional arguments affecting the summary produced).}
+\item{...}{Passthrough arguments to boxplot (additional arguments
+affecting the summary produced).}
 }
 \value{
 Returns an invisible data frame containing the values.
 }
 \description{
-This function plots the expression of the supplied countDat object, representing ratios between a pair of selected treatments as a boxplot for each group in the selected annotation column.
+This function plots the expression of the supplied
+countDat object, representing ratios between a pair of selected
+treatments as a boxplot for each group in the selected annotation column.
 }
 \details{
-This function boxplots expression of the supplied countDat object using ratios of treatment1/treatment2.
+This function boxplots expression of the supplied countDat
+object using ratios of treatment1/treatment2.
+}
+\examples{
+data(hmel.data.doser)
+reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
+annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+levels = 1:21))
+hm.tr<-hmel.dat$trxLength
+hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+annotation=annotxn)
+replicates(hm) <- reps
+libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+rpkm(hm) <- make_RPKM(hm)
+plotRatioBoxes(hm, groupings='Chromosome', treatment1 = 'Male',
+treatment2 = 'Female')
+
+
 }
 \references{
 The "doseR" package, 2018 (in press).
