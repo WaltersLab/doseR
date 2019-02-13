@@ -42,96 +42,106 @@
 #' By default (clusterby_grouping = TRUE), boxes are arranged by annotation
 #' group first, and then by treatment, but setting this option to FALSE
 #' arranges boxes by treatment and then annotation group. This function uses
-#' the base graphics “boxplot” function to generate the plot, so can accept
+#' the base graphics boxplot function to generate the plot, so can accept
 #' all relevant graphical arguments for customizing the figure;
-#' see “boxplot” for details.
+#' see boxplot for details.
 
 #' @examples
 #' data(hmel.data.doser)
-#' reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-#' annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
+#' reps <- c('Male', 'Male', 'Male', 'Female', 'Female', 'Female')
+#' annotxn <- data.frame('Chromosome' = factor(hmel.dat$chromosome,
 #' levels = 1:21))
 #' hm.tr<-hmel.dat$trxLength
-#' hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
+#' hm<-new('countDat',data=hmel.dat$readcounts,seglens=hm.tr,
 #' annotation=annotxn)
 #' replicates(hm) <- reps
-#' libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
+#' libsizes(hm) <- getLibsizes2(hm, estimationType = 'total')
 #' rpkm(hm) <- make_RPKM(hm)
-#' plotExpr(hm, groupings='Chromosome', treatment = "Male" )
+#' plotExpr(hm, groupings='Chromosome', treatment = 'Male' )
 
 #' @return Returns an invisible data frame containing values
 #' and labels used to generate the figure.
 #' @author AJ Vaestermark, JR Walters.
-#' @references The "doseR" package, 2018 (in press).
+#' @references The 'doseR' package, 2018 (in press).
 
-plotExpr <- function (cD, groupings= NULL, mode_mean=TRUE,
-treatment=levels(cD@replicates), LOG2=TRUE, clusterby_grouping=TRUE, ...) {
+plotExpr <- function(cD, groupings = NULL, mode_mean = TRUE,
+treatment = levels(cD@replicates), LOG2 = TRUE, clusterby_grouping = TRUE,
+...) {
 
-MyGroups<-cD@annotation[[groupings]]
+    MyGroups <- cD@annotation[[groupings]]
 
-if(is.null(groupings)) {
-stop ('No groupings, e.g. groupings="something"...')
-return (NULL)
-}
+    if (is.null(groupings)) {
+        stop("No groupings, e.g. groupings=\"something\"...")
+        return(NULL)
+    }
 
-if(
-is.element( FALSE, treatment %in% levels(cD@replicates) )
-) {
-stop ('Some treatment not in levels(cD@replicates), please check...')
-return (NULL)
-}
+    if (is.element(FALSE, treatment %in% levels(cD@replicates))) {
+        stop("Some treatment not in levels(cD@replicates), please check...")
+        return(NULL)
+    }
 
-MyLabels<-NULL
-PLOT <- NULL
-NAMES <- NULL
+    MyLabels <- NULL
+    PLOT <- NULL
+    NAMES <- NULL
 
-if ( is.factor(MyGroups) ) { MyGroups <- droplevels(MyGroups)
+    if (is.factor(MyGroups)) {
+        MyGroups <- droplevels(MyGroups)
 
-Super_ch<- if(clusterby_grouping) levels(MyGroups) else treatment
-# removed unique(MyGroups) # turned levels back to unique
-Super_dh<- if(clusterby_grouping) treatment else levels(MyGroups)
-# removed unique(MyGroups)
+        Super_ch <- if (clusterby_grouping)
+            levels(MyGroups) else treatment
+        # removed unique(MyGroups) # turned levels back to unique
+        Super_dh <- if (clusterby_grouping)
+            treatment else levels(MyGroups)
+        # removed unique(MyGroups)
 
-} else {
+    } else {
 
-Super_ch<- if(clusterby_grouping) unique(MyGroups) else treatment
-# removed unique(MyGroups) # turned levels back to unique
-Super_dh<- if(clusterby_grouping) treatment else unique(MyGroups)
-# removed unique(MyGroups)
+        Super_ch <- if (clusterby_grouping)
+            unique(MyGroups) else treatment
+        # removed unique(MyGroups) # turned levels back to unique
+        Super_dh <- if (clusterby_grouping)
+            treatment else unique(MyGroups)
+        # removed unique(MyGroups)
 
-}
+    }
 
-if ( is.factor(cD@replicates) )
-{ cD@replicates <- droplevels(cD@replicates) }
+    if (is.factor(cD@replicates)) {
+        cD@replicates <- droplevels(cD@replicates)
+    }
 
-for (ch in Super_ch) {
-for (dh in Super_dh) {
+    for (ch in Super_ch) {
+        for (dh in Super_dh) {
 
-actual_ch <- if(clusterby_grouping) dh else ch
-actual_dh <- if(clusterby_grouping) ch else dh
+            actual_ch <- if (clusterby_grouping)
+                dh else ch
+            actual_dh <- if (clusterby_grouping)
+                ch else dh
 
-if( is.element(actual_ch, treatment )) {
+            if (is.element(actual_ch, treatment)) {
 
-NAMES <- c( NAMES, paste0(actual_ch, actual_dh))
+                NAMES <- c(NAMES, paste0(actual_ch, actual_dh))
 
-RM<- if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==actual_ch])
-else matrixStats::rowMedians(cD@RPKM[,cD@replicates==actual_ch])
+                RM <- if (mode_mean)
+                rowMeans(cD@RPKM[, cD@replicates == actual_ch]) else
+                matrixStats::rowMedians(cD@RPKM[, cD@replicates == actual_ch])
 
-PLOT <-
-c( PLOT, RM[MyGroups == actual_dh ] )
+                PLOT <- c(PLOT, RM[MyGroups == actual_dh])
 
-MyLabels<- c( MyLabels,
-rep(paste0(actual_ch, actual_dh),
-length(  RM[MyGroups == actual_dh ] ))        )
+                MyLabels <- c(MyLabels, rep(paste0(actual_ch, actual_dh),
+                                            length(RM[MyGroups == actual_dh])))
 
-}}}
+            }
+        }
+    }
 
-if(LOG2) { PLOT <-  log2(PLOT) }
-PLOT[is.infinite(PLOT)] <- NA
-MyLabels<- factor(MyLabels, levels=NAMES)
+    if (LOG2) {
+        PLOT <- log2(PLOT)
+    }
+    PLOT[is.infinite(PLOT)] <- NA
+    MyLabels <- factor(MyLabels, levels = NAMES)
 
-boxplot(PLOT~MyLabels, ...)
+    boxplot(PLOT ~ MyLabels, ...)
 
-invisible( data.frame(values=PLOT,labels=MyLabels) )
+    invisible(data.frame(values = PLOT, labels = MyLabels))
 
-}# plotExpr
+}  # plotExpr

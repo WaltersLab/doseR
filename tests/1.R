@@ -1,4 +1,5 @@
 library('RUnit')
+library(doseR)
 
 data(hmel.data.doser)
 reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
@@ -14,5 +15,5 @@ f_hm <- quantFilter(hm, lo.bound = 0.4, hi.bound = 0.5)
 dm <- cD.DM(f_hm)
 temp <- glSeq(dm, "-1 + replicate")
 
-checkEqualsNumeric(temp@optinfo$val[4], 6.008)
-checkEqualsNumeric(temp@optinfo$val[5], 5.840)
+checkEqualsNumeric(round(temp@optinfo$val[4], 1), round(6.008, 1))
+checkEqualsNumeric(round(temp@optinfo$val[5], 1), round(5.840, 1))

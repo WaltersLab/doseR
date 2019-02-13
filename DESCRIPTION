@@ -1,7 +1,7 @@
 Package: doseR
 Type: Package
 Title: doseR
-Version: 0.99.0
+Version: 0.99.1
 Author: AV
 Maintainer: ake.vastermark <ake.vastermark@gmail.com>
 Description: "doseR", next generation sequencing package.
@@ -9,7 +9,7 @@ License: GPL
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: edgeR, methods, stats, graphics, matrixStats, mclust, abind, lme4
+Imports: edgeR, methods, stats, graphics, matrixStats, mclust, abind, lme4, RUnit
 Suggests: 
     knitr,
     rmarkdown
