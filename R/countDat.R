@@ -90,12 +90,10 @@ estimationType = c("quantile", "total",   "edgeR"),
 quantile = 0.75, ...) {
 data<-cD@data
 replicates <- cD@replicates
-
 if(missing(subset)) subset <- NULL
 if(is.null(subset)) subset <- seq_len(nrow(data))
 estimationType = match.arg(estimationType)
 if(is.na(estimationType)) stop("'estimationType' not known")
-
 estLibs <- function(data, replicates)
 {
 libsizes <- switch(estimationType,
@@ -104,7 +102,6 @@ quantile = apply(data[subset,, drop = FALSE], 2, function(z) {
 x <- z[z > 0]
 sum(x[x <= quantile(x, quantile, na.rm = TRUE)], na.rm = TRUE)
 }),
-
 edgeR = {
 if(!("edgeR" %in% loadedNamespaces()))
 requireNamespace("edgeR", quietly = TRUE)
@@ -116,7 +113,6 @@ d$samples$norm.factors * d$samples$lib.size
 names(libsizes) <- colnames(data)
 libsizes
 }
-
 if(length(dim(data)) == 2) estLibsizes <- estLibs(data, replicates)
 if(length(dim(data)) == 3) {
 combData <- do.call("cbind", lapply(seq_len(dim(data)[3]),
@@ -327,48 +323,28 @@ return(matrix(rep(1, nrow(x)), ncol = 1))
 
 setMethod("initialize", "countDat", function(.Object, ..., data,
 replicates, libsizes, seglens) {
-
 .Object <- callNextMethod(.Object, ...)
-
 if(!missing(data) && is.array(data)) .Object@data <- data
 if(!missing(data) && is.list(data)) .Object@data <-
 array(do.call("c", data), c(dim(data[[1]]), length(data)))
 if(missing(replicates)) replicates <- .Object@replicates
 .Object@replicates <- as.factor(replicates)
-
 if(length(dim(.Object@data)) == 1) .Object@data <-
 array(.Object@data, dim = c(dim(.Object@data),
 max(c(0, length(replicates), length(.Object@replicates)))))
-
 if(length(colnames(.Object@data)) == 0) colnames(.Object@data) <-
 make.unique(c(as.character(unique(.Object@replicates)),
 as.character(.Object@replicates)))[-(seq_len(
 length(unique(.Object@replicates))))]
-
 if(nrow(.Object@annotation) > 0 & nrow(.Object@annotation) !=
 nrow(.Object@data))
 warning("Number of rows of '@annotation' slot not same as '@data' slot.")
-
 if(length(.Object@nullPosts) != 0) {
 if(nrow(.Object@nullPosts) != nrow(.Object@data)
 & nrow((.Object@nullPosts) != 0))
 stop("Number of rows in '@data' slot must
 equal number of rows of '@nullPosts' slot.")
 } else nullPosts <- matrix(ncol = 0, nrow = nrow(.Object@data))
-
-if(!missing(libsizes)) {
-if(is.array(libsizes) && (any(dim(libsizes) != dim(.Object@data)[-1]))
-|| (is.vector(libsizes) & length(libsizes) != ncol(.Object@data)))
-stop("If provided, the 'libsizes' variable must be a vector of
-equal length to the columns of the `@data' array or an array of equal
-dimension to a row of the `@data' array")
-if(is.array(libsizes) && is.null(colnames(libsizes)))
-colnames(libsizes) <- colnames(.Object@data)
-if(is.vector(libsizes) && is.null(names(libsizes)))
-names(libsizes) <- colnames(.Object@data)
-.Object@sampleObservables$libsizes <- libsizes
-}
-
 if(!missing(seglens))
 {
 if(is.vector(seglens)) {
@@ -377,15 +353,7 @@ specified, and is a vector, the length of this variable must
 equal the number of rows of '@data' slot.")
 .Object@rowObservables$seglens <- seglens
 }
-if(is.array(seglens)) {
-if(length(dim(.Object@data)) != length(dim(seglens)) ||
-(any(dim(.Object@data) != dim(seglens)))) stop("If 'seglens'
-specified, and is an array, the dimensions of this variable
-must equal the dimensions of the '@data' slot.")
-.Object@cellObservables$seglens <- seglens
 }
-}
-
 if(length(.Object@rowObservables) > 0) {
 notRow <- vapply(.Object@rowObservables, length,
 numeric(1)) != nrow(.Object@data)
@@ -393,27 +361,9 @@ if(any(notRow)) stop(paste("The following '@rowObservables'
 elements have an incorrect length:", paste(names(notRow)[notRow],
 collapse = ",")))
 }
-if(length(.Object@sampleObservables) > 0) {
-notSample <- vapply(.Object@sampleObservables, function(x)
-(is.vector(x) && length(x) != ncol(.Object@data)) | (is.array(x) &&
-((length(dim(x)) != length(dim(.Object@data)) - 1) | any(dim(x) !=
-dim(.Object@data)[-1]))), logical(1))
-
-if(any(notSample)) stop(paste("The following '@sampleObservables'
-elements have an incorrect length:", paste(names(notSample)[notSample],
-collapse = ",")))
-}
-if(length(.Object@cellObservables) > 0) {
-notCell <- vapply(.Object@cellObservables, function(oco)
-any(dim(oco)[seq_len(2)] != dim(.Object@data)[seq_len(2)]), logical(1) )
-if(any(notCell)) stop(paste("The following '@cellObservables' elements
-have incorrect dimensions:", paste(names(notCell)[notCell], collapse = ",")))
-}
-
 if(length(replicates) != 0 && length(replicates) != ncol(.Object@data))
 stop("The length of the '@replicates' slot must equal number of
 columns of '@data' slot.")
-
 .Object
 })
 

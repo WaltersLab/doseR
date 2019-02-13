@@ -1,4 +1,4 @@
-library('RUnit')
+
 library(doseR)
 
 data(hmel.data.doser)
@@ -15,5 +15,5 @@ f_hm <- quantFilter(hm, lo.bound = 0.4, hi.bound = 0.5)
 dm <- cD.DM(f_hm)
 temp <- glSeq(dm, "-1 + replicate")
 
-checkEqualsNumeric(round(temp@optinfo$val[4], 1), round(6.008, 1))
-checkEqualsNumeric(round(temp@optinfo$val[5], 1), round(5.840, 1))
+RUnit::checkEqualsNumeric(round(temp@optinfo$val[4], 1), round(6.008, 1))
+RUnit::checkEqualsNumeric(round(temp@optinfo$val[5], 1), round(5.840, 1))

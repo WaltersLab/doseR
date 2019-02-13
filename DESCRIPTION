@@ -1,7 +1,7 @@
 Package: doseR
 Type: Package
 Title: doseR
-Version: 0.99.1
+Version: 0.99.2
 Author: AV
 Maintainer: ake.vastermark <ake.vastermark@gmail.com>
 Description: "doseR", next generation sequencing package.

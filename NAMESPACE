@@ -7,4 +7,4 @@ importFrom("stats", "density", "kruskal.test", "ks.test", "median",
 importFrom("graphics", "abline", "legend")
 importFrom("stats", "formula", "poisson")
 importFrom("graphics", "axTicks", "axis")
-
+import("RUnit")

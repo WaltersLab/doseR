@@ -36,29 +36,29 @@
 test_diffs <- function (cD, groupings= NULL, treatment1=NULL,
 treatment2=NULL, mode_mean=TRUE, LOG2=TRUE) {
 
-if(is.null(groupings)) {
-stop ('No groupings, e.g. groupings="something"...')
-return (NULL)
+    if(is.null(groupings)) {
+        stop ('No groupings, e.g. groupings="something"...')
+        return (NULL)
 }
 
 if(length(cD@RPKM) == 0) {
-stop ('No RPKM data saved in count data object... cancelling...')
-return (NULL)
+    stop ('No RPKM data saved in count data object... cancelling...')
+    return (NULL)
 }
 
 if(is.null(treatment1) | is.null(treatment2) ) {
-stop ('Indicate treatments, such as  treatment1="A", treatment2="B"')
-return (NULL)
+    stop ('Indicate treatments, such as  treatment1="A", treatment2="B"')
+    return (NULL)
 }
 
 MyGroups<-cD@annotation[[groupings]]
 
 RM<- (
-if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==treatment1]) else
-matrixStats::rowMedians(cD@RPKM[,cD@replicates==treatment1])
+    if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==treatment1]) else
+    matrixStats::rowMedians(cD@RPKM[,cD@replicates==treatment1])
 ) / (
-if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==treatment2]) else
-matrixStats::rowMedians(cD@RPKM[,cD@replicates==treatment2])
+    if(mode_mean) rowMeans(cD@RPKM[,cD@replicates==treatment2]) else
+    matrixStats::rowMedians(cD@RPKM[,cD@replicates==treatment2])
 )
 
 if(LOG2) { RM<-log2(RM) }
