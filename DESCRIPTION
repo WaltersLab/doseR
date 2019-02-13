@@ -1,7 +1,7 @@
 Package: doseR
 Type: Package
 Title: doseR
-Version: 0.99.3
+Version: 0.99.4
 Author: AV
 Maintainer: ake.vastermark <ake.vastermark@gmail.com>
 Description: "doseR", next generation sequencing package.
@@ -15,4 +15,4 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 biocViews: 	Infrastructure, Software, DataRepresentation, Sequencing
-Depends: R (>= 3.5)
+Depends: R (>= 3.6)
