@@ -221,10 +221,11 @@ counts <- hmel.dat$readcounts
 colData <- DataFrame(Treatment=as.factor(reps), 
 row.names=colnames(hmel.dat$readcounts))
 rowData <- DataFrame(annotation = annotxn, 
+seglens = hmel.dat$trxLength,
 row.names=rownames(hmel.dat$readcounts) )
 se2 <- SummarizedExperiment(assays=list(counts=counts), 
 colData=colData, rowData=rowData)
-metadata(se2)$seglens <- hmel.dat$trxLength
+#metadata(se2)$seglens <- hmel.dat$trxLength
 ```
 
 ## Normalization & RPKM

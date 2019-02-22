@@ -30,8 +30,8 @@ assays(sel)$counts[,
 ii]), sample = factor(colnames(assays(sel)$counts)[ii], levels = colnames(
 assays(sel)$counts)),
 replicate = colData(sel)$Treatment[ii])
-if (length(list(metadata(sel)$seglens)) > 0)
-dat <- cbind(dat, do.call("cbind", list(metadata(sel)$seglens)))
+if (length(list(rowData(sel)$seglens)) > 0)
+dat <- cbind(dat, do.call("cbind", list(rowData(sel)$seglens)))
 if (length(list()) > 0)
 dat <- cbind(dat, do.call("cbind", lapply(list(),
 function(x) x[, ii])))

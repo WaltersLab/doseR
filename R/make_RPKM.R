@@ -16,6 +16,6 @@
 make_RPKM <- function(se) {
 return(
 sweep(sweep(assays(se)$counts, 2, as.vector(colData(se)$Libsizes/1000000),
-FUN = '/'), 1, metadata(se)$seglens/1000, FUN = '/')
+FUN = '/'), 1, rowData(se)$seglens/1000, FUN = '/')
 )
 }

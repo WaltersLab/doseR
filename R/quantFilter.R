@@ -52,7 +52,7 @@ pct <- percent(  length(outliers)  / length(rpkm)   )
 message( "Filtering removed ", length(outliers), " (", pct, ") of ",
 length(rpkm), " total loci." )
 
-metadata(se)$seglens <- metadata(se)$seglens[-outliers]
+#metadata(se)$seglens <- metadata(se)$seglens[-outliers]
 
 return(se[-outliers,]) # remove all rows with "outlier" status
 
