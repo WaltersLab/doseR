@@ -1,47 +1,38 @@
-#' @title iqrxFilter Function to filter expression data within a countDat
+#' @title iqrxFilter Function to filter expression data within an s.e.
 #' object.
-#' @description This function filters the expression of the supplied countDat
+#' @description This function filters the expression of the supplied se
 #' object. iqrxFilter is a filtering function used to remove rows (genes) of
 #' various expression data.
-#' @usage iqrxFilter(cD, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
-#' @param cD A countDat object.
+#' @usage iqrxFilter(se, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
+#' @param se An s.e. object.
 #' @param iqr_multi Numeric multiplier; removes any outliers that are iqr_multi
 #'  times the mid-50 percentile distance greater or less than the 25th and 75th
 #'  percentiles, by default
 #' @param MEDIAN Boolean, Calculate RowMeans or RowMedians.
 #' @param na.rm Boolean, NA removal.
-#' @details This function filters the expression of the supplied cD object,
+#' @details This function filters the expression of the supplied se object,
 #' based on a selected percentage cutoff and selected interquartile range
 #' multiplier. The function iqrxFilter will: 1) log-base two transform all RPKM
 #' values (obligatory); (2) remove any outliers that were 1.5 times the mid-50
 #' percentile distance greater or less than the 75th and 25th percentiles
 #' (by default), respectively; and (3) uses mean values and instead of median
 #' values (by default).
-#' @return Returns a filtered countDat object.
+#' @return Returns a filtered se object.
 #'
 #' @examples
-#' data(hmel.data.doser)
-#' reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-#' annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-#' levels = 1:21))
-#' hm.tr<-hmel.dat$trxLength
-#' hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-#' annotation=annotxn)
-#' replicates(hm) <- reps
-#' libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-#' rpkm(hm) <- make_RPKM(hm)
-#' f_hm <- iqrxFilter(hm)
+#' data(hmel.se)
+#' f_se <- iqrxFilter(se)
 #'
 #' @author AJ Vaestermark, JR Walters.
 #' @references Jue et al. BMC Genomics 2013 14:150
 
-iqrxFilter <- function(cD, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE) {
+iqrxFilter <- function(se, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE) {
 
 if(MEDIAN) {
 
-rpkm <- log2(matrixStats::rowMedians( cD@RPKM, na.rm = na.rm))
+rpkm <- log2(matrixStats::rowMedians( assays(se)$rpkm, na.rm = na.rm))
 } else {
-rpkm <- log2(rowMeans( cD@RPKM, na.rm = na.rm ))
+rpkm <- log2(rowMeans( assays(se)$rpkm, na.rm = na.rm ))
 }
 
 interq <- quantile(x = rpkm[is.finite(rpkm)], probs = c(.25, .75) )
@@ -58,6 +49,8 @@ pct <- percent(  length(outliers)  / length(rpkm)   )
 message( "Filtering removed ", length(outliers), " (", pct, ") of ",
 length(rpkm), " total loci." )
 
-return(cD[-outliers,]) # remove all rows with "outlier" status
+metadata(se)$seglens <- metadata(se)$seglens[-outliers]
+
+return(se[-outliers,]) # remove all rows with "outlier" status
 
 }

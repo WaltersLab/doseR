@@ -7,7 +7,7 @@
 glSeq(dm, model, ...)
 }
 \arguments{
-\item{dm}{The dm data. Generally a reformatted countDat object from cD.DM.}
+\item{dm}{The dm data. Generally a reformatted se object from se.DM.}
 
 \item{model}{The model. Expressed using standard LME4 syntax, see vignette.}
 
@@ -23,20 +23,10 @@ This function is an LME4 wrapper for dosage analysis.
 This function is an lme4 wrapper.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- quantFilter(hm, lo.bound = 0.4, hi.bound = 0.5)
-dm <- cD.DM(f_hm)
+data(hmel.se)
+f_se <- quantFilter(se, lo.bound = 0.4, hi.bound = 0.5)
+dm <- se.DM(f_se)
 glSeq(dm, "-1 + replicate")
-
 }
 \references{
 The "doseR" package, 2018 (in press).

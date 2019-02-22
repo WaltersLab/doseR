@@ -3,16 +3,16 @@
 \name{plotRatioDensity}
 \alias{plotRatioDensity}
 \title{plotRatioDensity Function to plot density of ratios between two
-treatments (using groupings from an annotation column) within a countDat
+treatments (using groupings from an annotation column) within an se
 object.}
 \usage{
-plotRatioDensity(cD, groupings= NULL, treatment1=NULL,
+plotRatioDensity(se, groupings= NULL, treatment1=NULL,
 treatment2=NULL, mode_mean=TRUE, LOG2=TRUE,...)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An se object.}
 
-\item{groupings}{A grouping (annotation column), e.g. groupings="something".}
+\item{groupings}{A grouping (annotation); groupings="annotation.ZA"}
 
 \item{treatment1}{Symbol, treatment 1.}
 
@@ -30,27 +30,16 @@ Returns an invisible data frame containing the x-values and
 corresponding density for each applicable annotation column entry.
 }
 \description{
-This function plots the expression of the supplied countDat
+This function plots the expression of the supplied se
 object, using ratios between a pair of selected treatments.
 }
 \details{
-This function plots expression of the supplied countDat object
+This function plots expression of the supplied se object
 using ratios of treatment1/treatment2.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-annotxn$ZA <- factor(ifelse(hmel.dat$chromosome == 21, "Z", "A"),
-levels = c("A", "Z"))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-plotRatioDensity(hm, groupings='ZA', treatment1 = 'Male',
+data(hmel.se)
+plotRatioDensity(se, groupings='annotation.ZA', treatment1 = 'Male',
 treatment2 = 'Female',lty=1,type="l")
 
 

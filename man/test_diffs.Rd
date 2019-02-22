@@ -3,15 +3,15 @@
 \name{test_diffs}
 \alias{test_diffs}
 \title{test_diffs Statistics function to summarize expression
-data of a countDat object, using ratios between selected treatments.}
+data of an se object, using ratios between selected treatments.}
 \usage{
-test_diffs(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+test_diffs(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An se object.}
 
-\item{groupings}{A grouping (annotation column), e.g. groupings="something".}
+\item{groupings}{A grouping (annotation column); groupings="annotation.ZA".}
 
 \item{treatment1}{Symbol, treatment 1.}
 
@@ -23,7 +23,7 @@ mode_mean=TRUE, LOG2=TRUE)
 }
 \value{
 Returns an invisible list of summary statistics,
-kruskal test and raw data of a countDat object, using ratios
+kruskal test and raw data of an se object, using ratios
 between selected treatments.
 }
 \description{
@@ -32,20 +32,11 @@ expression data, using ratios between selected treatments.
 }
 \details{
 This function completes summary statistics of the expression of
-the supplied countDat object.
+the supplied se object.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-test_diffs(hm, groupings='Chromosome',treatment1="Male",
+data(hmel.se)
+test_diffs(se, groupings='annotation.ZA',treatment1="Male",
 treatment2="Female" )
 
 }

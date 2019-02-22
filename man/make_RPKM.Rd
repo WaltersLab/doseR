@@ -4,28 +4,20 @@
 \alias{make_RPKM}
 \title{make_RPKM Make RPKM.}
 \usage{
-make_RPKM(cd_object)
+make_RPKM(se)
 }
 \arguments{
-\item{cd_object}{A countDat object.}
+\item{se}{An se object.}
 }
 \value{
 RPKM populated object
 }
 \description{
-make_RPKM populates RPKM slot of modified countData (countDat)
+make_RPKM populates RPKM slot of se
 S4 object.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hmtr <- hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,replicates=reps,seglens=hmtr,
-annotation=annotxn)
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
+data(hmel.se)
 }
 \references{
 The "doseR" package, 2018 (in press).

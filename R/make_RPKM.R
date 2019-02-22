@@ -1,28 +1,21 @@
 #' @title make_RPKM Make RPKM.
-#' @description make_RPKM populates RPKM slot of modified countData (countDat)
+#' @description make_RPKM populates RPKM slot of se
 #' S4 object.
-#' @usage make_RPKM(cd_object)
-#' @param cd_object A countDat object.
+#' @usage make_RPKM(se)
+#' @param se An se object.
 #' @return RPKM populated object
 #'
 #' @examples
-
-#' data(hmel.data.doser)
-#' reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-#' annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-#' levels = 1:21))
-#' hmtr <- hmel.dat$trxLength
-#' hm<-new("countDat",data=hmel.dat$readcounts,replicates=reps,seglens=hmtr,
-#' annotation=annotxn)
-#' libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-#' rpkm(hm) <- make_RPKM(hm)
+#' data(hmel.se)
 
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
-make_RPKM <- function(cd_object) {
+#require(SummarizedExperiment)
+
+make_RPKM <- function(se) {
 return(
-sweep(sweep(cd_object@data, 2, as.vector(libsizes(cd_object)/1000000),
-FUN = '/'), 1, cd_object@rowObservables$seglens/1000, FUN = '/')
+sweep(sweep(assays(se)$counts, 2, as.vector(colData(se)$Libsizes/1000000),
+FUN = '/'), 1, metadata(se)$seglens/1000, FUN = '/')
 )
 }

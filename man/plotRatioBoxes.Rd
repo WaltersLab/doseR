@@ -4,13 +4,13 @@
 \alias{plotRatioBoxes}
 \title{plotRatioBoxes Function to boxplot density of ratios
 between two treatments (using groupings from an annotation column)
-within a countDat object.}
+within an se object.}
 \usage{
-plotRatioBoxes(cD, groupings= NULL, treatment1=NULL, treatment2=NULL,
+plotRatioBoxes(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 mode_mean=TRUE, LOG2=TRUE, ...)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An se object.}
 
 \item{groupings}{A grouping (annotation column), e.g. groupings="something".}
 
@@ -30,25 +30,16 @@ Returns an invisible data frame containing the values.
 }
 \description{
 This function plots the expression of the supplied
-countDat object, representing ratios between a pair of selected
+se object, representing ratios between a pair of selected
 treatments as a boxplot for each group in the selected annotation column.
 }
 \details{
-This function boxplots expression of the supplied countDat
+This function boxplots expression of the supplied se
 object using ratios of treatment1/treatment2.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-plotRatioBoxes(hm, groupings='Chromosome', treatment1 = 'Male',
+data(hmel.se)
+plotRatioBoxes(se, groupings='annotation.ZA', treatment1 = 'Male',
 treatment2 = 'Female')
 
 

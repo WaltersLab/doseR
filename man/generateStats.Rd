@@ -3,12 +3,12 @@
 \name{generateStats}
 \alias{generateStats}
 \title{generateStats Statistics function to summarize expression
-data of a countDat object.}
+data of an s.e. object.}
 \usage{
-generateStats(cD, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
+generateStats(se, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An s.e. object.}
 
 \item{groupings}{A grouping (annotation column), e.g. groupings="something".}
 
@@ -18,7 +18,7 @@ generateStats(cD, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
 }
 \value{
 Returns an invisible list of summary statistics, kruskal test
-and raw data of a countDat object.
+and raw data of an s.e. object.
 }
 \description{
 generateStats is a summary function used on various
@@ -26,20 +26,11 @@ expression data.
 }
 \details{
 This function completes summary statistics of the expression
-of the supplied countDat object.
+of the supplied s.e. object.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-generateStats(hm, groupings='Chromosome')
+data(hmel.se)
+generateStats(se, groupings="annotation.ZA")
 
 }
 \references{

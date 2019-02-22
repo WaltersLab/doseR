@@ -2,13 +2,13 @@
 % Please edit documentation in R/simpleFilter.R
 \name{simpleFilter}
 \alias{simpleFilter}
-\title{simpleFilter Function to filter expression data of a countDat object.}
+\title{simpleFilter Function to filter expression data of an se object.}
 \usage{
-simpleFilter(cD, mean_cutoff=NULL, min_cutoff=NULL, median_cutoff=
+simpleFilter(se, mean_cutoff=NULL, min_cutoff=NULL, median_cutoff=
 NULL, counts=TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An se object.}
 
 \item{mean_cutoff}{The lower cutoff, using mean.}
 
@@ -19,29 +19,17 @@ NULL, counts=TRUE)
 \item{counts}{Boolean, use raw counts data (default) or RPKM.}
 }
 \value{
-Returns a filtered countDat object.
+Returns a filtered se object.
 }
 \description{
 simpleFilter is a filtering function used to remove rows
 (genes) of various expression data.
 }
 \details{
-This function filters the expression of the supplied countDat
-object, based on a selected cutoff.
+This function filters the expression of the supplied se obj.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- simpleFilter(hm, mean_cutoff=0.5)
-
+data(hmel.se) ; f_se <- simpleFilter(se, mean_cutoff=0.5)
 }
 \references{
 The "doseR" package, 2018 (in press).

@@ -2,13 +2,13 @@
 % Please edit documentation in R/iqrxFilter.R
 \name{iqrxFilter}
 \alias{iqrxFilter}
-\title{iqrxFilter Function to filter expression data within a countDat
+\title{iqrxFilter Function to filter expression data within an s.e.
 object.}
 \usage{
-iqrxFilter(cD, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
+iqrxFilter(se, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An s.e. object.}
 
 \item{iqr_multi}{Numeric multiplier; removes any outliers that are iqr_multi
 times the mid-50 percentile distance greater or less than the 25th and 75th
@@ -19,15 +19,15 @@ percentiles, by default}
 \item{na.rm}{Boolean, NA removal.}
 }
 \value{
-Returns a filtered countDat object.
+Returns a filtered se object.
 }
 \description{
-This function filters the expression of the supplied countDat
+This function filters the expression of the supplied se
 object. iqrxFilter is a filtering function used to remove rows (genes) of
 various expression data.
 }
 \details{
-This function filters the expression of the supplied cD object,
+This function filters the expression of the supplied se object,
 based on a selected percentage cutoff and selected interquartile range
 multiplier. The function iqrxFilter will: 1) log-base two transform all RPKM
 values (obligatory); (2) remove any outliers that were 1.5 times the mid-50
@@ -36,17 +36,8 @@ percentile distance greater or less than the 75th and 25th percentiles
 values (by default).
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- iqrxFilter(hm)
+data(hmel.se)
+f_se <- iqrxFilter(se)
 
 }
 \references{

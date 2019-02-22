@@ -2,14 +2,14 @@
 % Please edit documentation in R/quantFilter.R
 \name{quantFilter}
 \alias{quantFilter}
-\title{quantFilter Function to filter expression data of a
-countDat object.}
+\title{quantFilter Function to filter expression data of an
+se object.}
 \usage{
-quantFilter (cD, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
+quantFilter (se, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
 na.rm = TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{An se object.}
 
 \item{lo.bound}{The lower cutoff, expressed as a percentage.}
 
@@ -20,29 +20,20 @@ na.rm = TRUE)
 \item{na.rm}{Boolean, NA removal.}
 }
 \value{
-Returns a filtered countDat object.
+Returns a filtered se object.
 }
 \description{
 This function filters the expression of the supplied
-countDat object; quantFilter is a filtering function used to remove
+se object; quantFilter is a filtering function used to remove
 rows (genes) of various expression data.
 }
 \details{
-This function filters the expression of the supplied countDat
+This function filters the expression of the supplied se
 object, based on a selected percentage cutoff.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- quantFilter(hm, lo.bound=0.5)
+data(hmel.se)
+f_se <- quantFilter(se, lo.bound=0.5)
 
 }
 \references{

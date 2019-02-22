@@ -1,36 +1,27 @@
-#' @title quantFilter Function to filter expression data of a
-#' countDat object.
+#' @title quantFilter Function to filter expression data of an
+#' se object.
 #' @description This function filters the expression of the supplied
-#' countDat object; quantFilter is a filtering function used to remove
+#' se object; quantFilter is a filtering function used to remove
 #' rows (genes) of various expression data.
-#' @usage quantFilter (cD, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
+#' @usage quantFilter (se, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
 #' na.rm = TRUE)
-#' @param cD A countDat object.
+#' @param se An se object.
 #' @param lo.bound The lower cutoff, expressed as a percentage.
 #' @param hi.bound The upper cutoff, expressed as a percentage.
 #' @param MEDIAN Boolean, Calculate RowMeans or RowMedians.
 #' @param na.rm Boolean, NA removal.
-#' @details This function filters the expression of the supplied countDat
+#' @details This function filters the expression of the supplied se
 #' object, based on a selected percentage cutoff.
-#' @return Returns a filtered countDat object.
+#' @return Returns a filtered se object.
 
 #' @examples
-#' data(hmel.data.doser)
-#' reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-#' annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-#' levels = 1:21))
-#' hm.tr<-hmel.dat$trxLength
-#' hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-#' annotation=annotxn)
-#' replicates(hm) <- reps
-#' libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-#' rpkm(hm) <- make_RPKM(hm)
-#' f_hm <- quantFilter(hm, lo.bound=0.5)
+#' data(hmel.se)
+#' f_se <- quantFilter(se, lo.bound=0.5)
 #'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
-quantFilter <- function(cD, lo.bound=.25, hi.bound=.75, MEDIAN =
+quantFilter <- function(se, lo.bound=.25, hi.bound=.75, MEDIAN =
 FALSE, na.rm = TRUE) {
 
 if(lo.bound > hi.bound) {
@@ -46,9 +37,9 @@ stop('hi.bound outside range... cancelling...')
 }
 
 if(MEDIAN) {
-rpkm <- log2(matrixStats::rowMedians( cD@RPKM, na.rm = na.rm))
+rpkm <- log2(matrixStats::rowMedians( assays(se)$rpkm, na.rm = na.rm))
 } else {
-rpkm <- log2(rowMeans( cD@RPKM, na.rm = na.rm ))
+rpkm <- log2(rowMeans( assays(se)$rpkm, na.rm = na.rm ))
 }
 
 interq <- quantile(x = rpkm[is.finite(rpkm)], probs = c(lo.bound, hi.bound) )
@@ -61,6 +52,8 @@ pct <- percent(  length(outliers)  / length(rpkm)   )
 message( "Filtering removed ", length(outliers), " (", pct, ") of ",
 length(rpkm), " total loci." )
 
-return(cD[-outliers,]) # remove all rows with "outlier" status
+metadata(se)$seglens <- metadata(se)$seglens[-outliers]
+
+return(se[-outliers,]) # remove all rows with "outlier" status
 
 }

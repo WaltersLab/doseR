@@ -2,15 +2,15 @@
 % Please edit documentation in R/plotExpr.R
 \name{plotExpr}
 \alias{plotExpr}
-\title{plotExpr Function to generate a boxplot (expression) for a
-countDat object based on the replicate data.}
+\title{plotExpr Function to generate a boxplot (expression) for an
+se object based on the replicate data.}
 \usage{
-plotExpr(cD, groupings= NULL, mode_mean=TRUE,
-treatment=levels(cD@replicates),
+plotExpr(se, groupings= NULL, mode_mean=TRUE,
+treatment=levels(colData(se)$Treatment),
 LOG2=TRUE, clusterby_grouping=TRUE, ...)
 }
 \arguments{
-\item{cD}{A countDat object containing FPKM values and at least
+\item{se}{An se object containing FPKM values and at least
 one annotation column.}
 
 \item{groupings}{Specifies which column in the dataframe of the
@@ -43,19 +43,19 @@ and labels used to generate the figure.
 }
 \description{
 This function generates a boxplot of FPKM expression
-values from the supplied countDat object. FPKM values are averaged
+values from the supplied se object. FPKM values are averaged
 across replicates and partitioned among groups of loci as specified
-in a selected column from the annotation slot of the provided countDat
+in a selected column from the annotation slot of the provided se
 object.
 }
 \details{
 This function generates boxplots to visualize the distribution
-of FPKM expression values provided in a countDat object, arranged by
+of FPKM expression values provided in an se object, arranged by
 selected treatments and locus annotations. FPKM values are averaged
 (mean or median) within selected treatments, to provide a single
 expression value per locus per treatment. Loci are partitioned
 into groupings based on a specified column in the dataframe of
-annotations slot of the countDat object. Thus a box is drawn for
+annotations slot of the se object. Thus a box is drawn for
 each grouping of loci for each treatment indicated. Desired treatments
 and their ordering are specified by the treatment argument. Groupings
 are arranged by sort order of the annotation column indicated, and can
@@ -63,25 +63,16 @@ thus be controlled by providing a factor with a pre-specified level order.
 By default (clusterby_grouping = TRUE), boxes are arranged by annotation
 group first, and then by treatment, but setting this option to FALSE
 arranges boxes by treatment and then annotation group. This function uses
-the base graphics “boxplot” function to generate the plot, so can accept
+the base graphics boxplot function to generate the plot, so can accept
 all relevant graphical arguments for customizing the figure;
-see “boxplot” for details.
+see boxplot for details.
 }
 \examples{
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-plotExpr(hm, groupings='Chromosome', treatment = "Male" )
+data(hmel.se)
+plotExpr(se, groupings = "annotation.ZA", treatment = 'Male' )
 }
 \references{
-The "doseR" package, 2018 (in press).
+The 'doseR' package, 2018 (in press).
 }
 \author{
 AJ Vaestermark, JR Walters.

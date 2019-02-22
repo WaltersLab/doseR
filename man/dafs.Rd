@@ -23,20 +23,10 @@ This function filters the expression, using
 Data Adaptive Flag method.
 }
 \examples{
-
 library(mclust)
 library(edgeR)
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- dafsFilter(hm)
+data(hmel.se)
+f_se <- dafsFilter(se)
 
 }
 \references{

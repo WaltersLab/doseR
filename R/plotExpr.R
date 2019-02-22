@@ -1,14 +1,14 @@
-#' @title plotExpr Function to generate a boxplot (expression) for a
-#' countDat object based on the replicate data.
+#' @title plotExpr Function to generate a boxplot (expression) for an
+#' se object based on the replicate data.
 #' @description This function generates a boxplot of FPKM expression
-#' values from the supplied countDat object. FPKM values are averaged
+#' values from the supplied se object. FPKM values are averaged
 #' across replicates and partitioned among groups of loci as specified
-#' in a selected column from the annotation slot of the provided countDat
+#' in a selected column from the annotation slot of the provided se
 #' object.
-#' @usage plotExpr(cD, groupings= NULL, mode_mean=TRUE,
-#' treatment=levels(cD@replicates),
+#' @usage plotExpr(se, groupings= NULL, mode_mean=TRUE,
+#' treatment=levels(colData(se)$Treatment),
 #' LOG2=TRUE, clusterby_grouping=TRUE, ...)
-#' @param cD A countDat object containing FPKM values and at least
+#' @param se An se object containing FPKM values and at least
 #' one annotation column.
 #' @param groupings Specifies which column in the dataframe of the
 #' annotation slot that will be used to group loci in the boxplot.
@@ -29,12 +29,12 @@
 #' @param ... Additional named arguments and graphical parameters passed
 #' to the boxplot function.
 #' @details This function generates boxplots to visualize the distribution
-#' of FPKM expression values provided in a countDat object, arranged by
+#' of FPKM expression values provided in an se object, arranged by
 #' selected treatments and locus annotations. FPKM values are averaged
 #' (mean or median) within selected treatments, to provide a single
 #' expression value per locus per treatment. Loci are partitioned
 #' into groupings based on a specified column in the dataframe of
-#' annotations slot of the countDat object. Thus a box is drawn for
+#' annotations slot of the se object. Thus a box is drawn for
 #' each grouping of loci for each treatment indicated. Desired treatments
 #' and their ordering are specified by the treatment argument. Groupings
 #' are arranged by sort order of the annotation column indicated, and can
@@ -46,30 +46,22 @@
 #' all relevant graphical arguments for customizing the figure;
 #' see boxplot for details.
 #' @examples
-#' data(hmel.data.doser)
-#' reps <- c('Male', 'Male', 'Male', 'Female', 'Female', 'Female')
-#' annotxn <- data.frame('Chromosome' = factor(hmel.dat$chromosome,
-#' levels = 1:21))
-#' hm.tr<-hmel.dat$trxLength
-#' hm<-new('countDat',data=hmel.dat$readcounts,seglens=hm.tr,
-#' annotation=annotxn)
-#' replicates(hm) <- reps
-#' libsizes(hm) <- getLibsizes2(hm, estimationType = 'total')
-#' rpkm(hm) <- make_RPKM(hm)
-#' plotExpr(hm, groupings='Chromosome', treatment = 'Male' )
+#' data(hmel.se)
+#' plotExpr(se, groupings = "annotation.ZA", treatment = 'Male' )
 #' @return Returns an invisible data frame containing values
 #' and labels used to generate the figure.
 #' @author AJ Vaestermark, JR Walters.
 #' @references The 'doseR' package, 2018 (in press).
-plotExpr <- function(cD, groupings = NULL, mode_mean = TRUE,
-treatment = levels(cD@replicates), LOG2 = TRUE, clusterby_grouping = TRUE,
+
+plotExpr <- function(se, groupings = NULL, mode_mean = TRUE,
+treatment=levels(colData(se)$Treatment), LOG2 = TRUE, clusterby_grouping=TRUE,
 ...) {
-    MyGroups <- cD@annotation[[groupings]]
+    MyGroups <- rowData(se)[[groupings]]
     if (is.null(groupings)) {
         stop("No groupings, e.g. groupings=\"something\"..."); return(NULL)
     }
-    if (is.element(FALSE, treatment %in% levels(cD@replicates))) {
-        stop("Some treatment not in levels(cD@replicates), please check...")
+    if (is.element(FALSE, treatment %in% levels(colData(se)$Treatment))) {
+stop("Some treatment not in levels(colData(se)$Treatment), please check...")
         return(NULL)
     }
     MyLabels <- NULL ; PLOT <- NULL ; NAMES <- NULL
@@ -83,8 +75,8 @@ treatment = levels(cD@replicates), LOG2 = TRUE, clusterby_grouping = TRUE,
         Super_ch <- if (clusterby_grouping) unique(MyGroups) else treatment
         Super_dh <- if (clusterby_grouping) treatment else unique(MyGroups)
     }
-    if (is.factor(cD@replicates)) {
-        cD@replicates <- droplevels(cD@replicates)
+    if (is.factor(colData(se)$Treatment)) {
+colData(se)$Treatment <- droplevels(colData(se)$Treatment)
     }
     for (ch in Super_ch) {
         for (dh in Super_dh) {
@@ -95,11 +87,11 @@ treatment = levels(cD@replicates), LOG2 = TRUE, clusterby_grouping = TRUE,
             if (is.element(actual_ch, treatment)) {
                 NAMES <- c(NAMES, paste0(actual_ch, actual_dh))
                 RM <- if (mode_mean)
-                rowMeans(cD@RPKM[, cD@replicates == actual_ch]) else
-                matrixStats::rowMedians(cD@RPKM[, cD@replicates == actual_ch])
+rowMeans(assays(se)$rpkm[, colData(se)$Treatment == actual_ch]) else
+matrixStats::rowMedians(assays(se)$rpkm[, colData(se)$Treatment == actual_ch])
                 PLOT <- c(PLOT, RM[MyGroups == actual_dh])
                 MyLabels <- c(MyLabels, rep(paste0(actual_ch, actual_dh),
-                                            length(RM[MyGroups == actual_dh])))
+length(RM[MyGroups == actual_dh])))
 
             }
         }

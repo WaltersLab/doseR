@@ -2,25 +2,25 @@
 % Please edit documentation in R/dafsFilter.R
 \name{dafsFilter}
 \alias{dafsFilter}
-\title{dafsFilter Function to filter expression data within a cD object.}
+\title{dafsFilter Function to filter expression data within an "se" object.}
 \usage{
-dafsFilter(cD, PLOT=TRUE)
+dafsFilter(se, PLOT=TRUE)
 }
 \arguments{
-\item{cD}{A countDat object.}
+\item{se}{A SummExp object.}
 
 \item{PLOT}{Boolean, toggles plotting.}
 }
 \value{
-Returns an invisible, filtered countDat object.
+Returns an invisible, filtered SummExp object.
 }
 \description{
 This function filters the expression of the supplied
-countDat object, by invoking the dafsFilter (dafs) function. dafsFilter is a
+"se" object, by invoking the dafsFilter (dafs) function. dafsFilter is a
 filtering function used to remove rows (genes) of various expression data.
 }
 \details{
-This function filters the expression of the supplied cD object
+This function filters the expression of the supplied se object
 using a Data Adaptive Flag filter. The internal function uses a vector
 to store Kolmogorov Smirnov distance statistics, loops through cuts of
 the data to determine targeted K-S statistic, selects data greater than
@@ -31,17 +31,8 @@ local minima (using the Earth library).
 \examples{
 library(mclust)
 library(edgeR)
-data(hmel.data.doser)
-reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
-levels = 1:21))
-hm.tr<-hmel.dat$trxLength
-hm<-new("countDat",data=hmel.dat$readcounts,seglens=hm.tr,
-annotation=annotxn)
-replicates(hm) <- reps
-libsizes(hm) <- getLibsizes2(hm, estimationType = "total")
-rpkm(hm) <- make_RPKM(hm)
-f_hm <- dafsFilter(hm)
+data(hmel.se)
+f_se <- dafsFilter(se)
 }
 \references{
 BMC Bioinformatics, 2014, 15:92
