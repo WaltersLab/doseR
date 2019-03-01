@@ -38,7 +38,6 @@ values (by default).
 \examples{
 data(hmel.se)
 f_se <- iqrxFilter(se)
-
 }
 \references{
 Jue et al. BMC Genomics 2013 14:150

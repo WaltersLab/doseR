@@ -41,8 +41,6 @@ using ratios of treatment1/treatment2.
 data(hmel.se)
 plotRatioDensity(se, groupings='annotation.ZA', treatment1 = 'Male',
 treatment2 = 'Female',lty=1,type="l")
-
-
 }
 \references{
 The "doseR" package, 2018 (in press).

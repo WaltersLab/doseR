@@ -11,11 +11,9 @@
 #' of the supplied s.e. object.
 #' @return Returns an invisible list of summary statistics, kruskal test
 #' and raw data of an s.e. object.
-#'
 #' @examples
 #' data(hmel.se)
 #' generateStats(se, groupings="annotation.ZA")
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
@@ -48,7 +46,3 @@ message("View output: outlist$kruskal, outlist$summary")
 invisible( list("summary" = val.summary, "kruskal" = val.k, "data" = tmp) )
 
 }# generateStats
-
-### SummExp Approved ###
-### SummExp Approved ###
-### SummExp Approved ###

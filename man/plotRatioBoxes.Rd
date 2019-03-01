@@ -41,8 +41,6 @@ object using ratios of treatment1/treatment2.
 data(hmel.se)
 plotRatioBoxes(se, groupings='annotation.ZA', treatment1 = 'Male',
 treatment2 = 'Female')
-
-
 }
 \references{
 The "doseR" package, 2018 (in press).

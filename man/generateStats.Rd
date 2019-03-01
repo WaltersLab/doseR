@@ -31,7 +31,6 @@ of the supplied s.e. object.
 \examples{
 data(hmel.se)
 generateStats(se, groupings="annotation.ZA")
-
 }
 \references{
 The "doseR" package, 2018 (in press).

@@ -20,28 +20,16 @@ median_cutoff=NULL, counts=TRUE)
 return (NULL) }
 ori_len<- nrow(assays(se)$counts)
 if(counts) { if(!is.null(mean_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[  apply(assays(se)$counts , 1,
-#function(x) mean(x) ) >= mean_cutoff  ]
 se <- se[  apply(assays(se)$counts , 1, function(x) mean(x) ) >= mean_cutoff,]}
 if(!is.null(min_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[ apply(assays(se)$counts , 1,
-#function(x) min(x) ) >= min_cutoff  ]
 se <- se[   apply(assays(se)$counts , 1, function(x) min(x) ) >= min_cutoff,]}
 if(!is.null(median_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[  apply(assays(se)$counts , 1,
-#function(x) median(x) ) >= median_cutoff ]
 se <- se[apply(assays(se)$counts , 1, function(x) median(x) )>=median_cutoff,]}
 } else {if(!is.null(mean_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[  apply(assays(se)$rpkm , 1,
-#function(x) mean(x) ) >= mean_cutoff  ]
 se <- se[   apply(assays(se)$rpkm , 1, function(x) mean(x) ) >= mean_cutoff,]}
 if(!is.null(min_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[  apply(assays(se)$rpkm , 1,
-#function(x) min(x) ) >= min_cutoff  ]
 se <- se[   apply(assays(se)$rpkm , 1, function(x) min(x) ) >= min_cutoff,]}
 if(!is.null(median_cutoff)) {
-#metadata(se)$seglens <- metadata(se)$seglens[  apply(assays(se)$rpkm , 1,
-#function(x) median(x) ) >= median_cutoff  ]
 se <- se[ apply(assays(se)$rpkm , 1, function(x) median(x) )>= median_cutoff,]
 }} ; percent <- function(x, digits = 2, format = "f", ...) { paste0(
 formatC(100 * x, format = format, digits = digits, ...), "%") }

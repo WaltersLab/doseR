@@ -4,14 +4,11 @@
 #' @usage make_RPKM(se)
 #' @param se An se object.
 #' @return RPKM populated object
-#'
 #' @examples
 #' data(hmel.se)
-
+#' SummarizedExperiment::assays(se)$rpkm <- make_RPKM(se)
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
-
-#require(SummarizedExperiment)
 
 make_RPKM <- function(se) {
 return(

@@ -42,7 +42,6 @@ This function makes MA plot from se object.
 \examples{
 data(hmel.se)
 plotMA.se(se, samplesA = 'Male', samplesB = 'Female')
-
 }
 \references{
 The 'doseR' package, 2018 (in press).

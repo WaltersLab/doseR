@@ -1,6 +1,3 @@
-require(lme4)
-require(SummarizedExperiment)
-
 #' @title se.DM Function to convert se object to LME4 input.
 #' @description This function generates LME4 input.
 #' @usage se.DM(se, weightByLL = TRUE)
@@ -44,8 +41,12 @@ rep((list(sel@colData$Libsizes)[[ss]]),
 each = nrow(assays(sel)$counts))
 dat <- dat[!is.na(dat[, 1]), , drop = FALSE]
 names(dat)[5]<-"seglens"
-dat$libsizes <- rep( mean( getLibsizes3(se, estimationType =
-"total") ) , nrow(se) )
+
+rep_ch<-NULL
+for (ch in colData(sel)$Libsizes) {
+rep_ch <- c( rep_ch, rep( ch, nrow(se) )  ) }
+dat$libsizes <- rep_ch
+
 invisible(dat) }
 
 ###########################

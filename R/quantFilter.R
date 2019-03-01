@@ -13,11 +13,9 @@
 #' @details This function filters the expression of the supplied se
 #' object, based on a selected percentage cutoff.
 #' @return Returns a filtered se object.
-
 #' @examples
 #' data(hmel.se)
 #' f_se <- quantFilter(se, lo.bound=0.5)
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
@@ -51,8 +49,6 @@ percent <- function(x, digits = 2, format = "f", ...) { paste0(formatC(
 pct <- percent(  length(outliers)  / length(rpkm)   )
 message( "Filtering removed ", length(outliers), " (", pct, ") of ",
 length(rpkm), " total loci." )
-
-#metadata(se)$seglens <- metadata(se)$seglens[-outliers]
 
 return(se[-outliers,]) # remove all rows with "outlier" status
 

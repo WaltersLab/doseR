@@ -160,9 +160,6 @@ Once installed, you must load the package.
 
 ```{r}
 library(doseR)
-#library(edgeR)
-#library(mclust)
-library(SummarizedExperiment)
 ```
 
 ## Example data: _Heliconius_ RNA-seq  
@@ -177,10 +174,7 @@ that these data are limited to only one representative transcript per gene).
 
 
 ```{r}
-
-
 data(hmel.data.doser)
-
 ```
 
 These three data elements are used to populate a new `SE` object, 
@@ -195,7 +189,6 @@ organized in the counts matrix.
 
 ```{r}
 reps <- c("Male", "Male", "Male", "Female", "Female", "Female")
-
 ```
 
 Second, we must create a dataframe to hold the annotation of gene 
@@ -210,7 +203,6 @@ annotxn <- data.frame("Chromosome" = factor(hmel.dat$chromosome,
 levels = 1:21))
 annotxn$ZA <- factor(ifelse(hmel.dat$chromosome == 21, "Z", "A"), 
 levels = c("A", "Z"))
-
 ```
 
 Now we are ready to populate a new `SE` object.
@@ -218,14 +210,14 @@ Now we are ready to populate a new `SE` object.
 ```{r}
 
 counts <- hmel.dat$readcounts
-colData <- DataFrame(Treatment=as.factor(reps), 
+colData <- S4Vectors::DataFrame(Treatment=as.factor(reps), 
 row.names=colnames(hmel.dat$readcounts))
-rowData <- DataFrame(annotation = annotxn, 
+rowData <- S4Vectors::DataFrame(annotation = annotxn, 
 seglens = hmel.dat$trxLength,
 row.names=rownames(hmel.dat$readcounts) )
 se2 <- SummarizedExperiment(assays=list(counts=counts), 
 colData=colData, rowData=rowData)
-#metadata(se2)$seglens <- hmel.dat$trxLength
+
 ```
 
 ## Normalization & RPKM
@@ -236,7 +228,8 @@ sequencing. Various methods for calculating a library size are provided,
 but we will use the most straightforward method of summing total read counts.
 
 ```{r}
-colData(se2)$Libsizes <- getLibsizes3(se2, estimationType = "total")
+SummarizedExperiment::colData(se2)$Libsizes <- getLibsizes3(se2, 
+estimationType = "total")
 
 ```
 
@@ -244,11 +237,15 @@ With library sizes now stored in the `SE` object, we can calculate
 RPKM values for each locus in each sample and store them in the RPKM slot.
 
 ```{r}
-assays(se2)$rpkm <- make_RPKM(se2)
+SummarizedExperiment::assays(se2)$rpkm <- make_RPKM(se2)
 
 # se2 now equals se...
 
 data(hmel.se)  # loads hmel.dat list
+
+# MD5 checksum equivalence:
+#library(digest)
+digest::digest(se) == digest::digest(se2)
 
 ```
 

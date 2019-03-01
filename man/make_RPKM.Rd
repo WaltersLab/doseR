@@ -18,6 +18,7 @@ S4 object.
 }
 \examples{
 data(hmel.se)
+SummarizedExperiment::assays(se)$rpkm <- make_RPKM(se)
 }
 \references{
 The "doseR" package, 2018 (in press).

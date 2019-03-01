@@ -34,7 +34,6 @@ object, based on a selected percentage cutoff.
 \examples{
 data(hmel.se)
 f_se <- quantFilter(se, lo.bound=0.5)
-
 }
 \references{
 The "doseR" package, 2018 (in press).

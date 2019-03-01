@@ -13,13 +13,9 @@
 #' distribution. The wrapper uses simpleFilter to determine first left-most
 #' local minima (using the Earth library).
 #' @return Returns an invisible, filtered SummExp object.
-
 #' @examples
-#' library(mclust)
-#' library(edgeR)
 #' data(hmel.se)
 #' f_se <- dafsFilter(se)
-
 #' @author AJ Vaestermark, JR Walters.
 #' @references BMC Bioinformatics, 2014, 15:92
 
@@ -32,7 +28,3 @@ cutoff <- dafs (VEC1, PLOT)
 invisible(   simpleFilter(se, mean_cutoff=2^cutoff, counts=FALSE    )    )
 
 }
-
-### SummExp Approved ###
-### SummExp Approved ###
-### SummExp Approved ###

@@ -22,7 +22,6 @@
 #' @examples
 #' data(hmel.se)
 #' plotMA.se(se, samplesA = 'Male', samplesB = 'Female')
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The 'doseR' package, 2018 (in press).
 

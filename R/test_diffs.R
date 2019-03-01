@@ -12,12 +12,10 @@
 #' @param LOG2 Boolean, Calculate LOG2.
 #' @details This function completes summary statistics of the expression of
 #' the supplied se object.
-#'
 #' @examples
 #' data(hmel.se)
 #' test_diffs(se, groupings='annotation.ZA',treatment1="Male",
 #' treatment2="Female" )
-#'
 #' @return Returns an invisible list of summary statistics,
 #' kruskal test and raw data of an se object, using ratios
 #' between selected treatments.

@@ -17,14 +17,10 @@
 #' @details This function boxplots expression of the supplied se
 #' object using ratios of treatment1/treatment2.
 #' @return Returns an invisible data frame containing the values.
-#'
 #' @examples
 #' data(hmel.se)
-
 #' plotRatioBoxes(se, groupings='annotation.ZA', treatment1 = 'Male',
 #' treatment2 = 'Female')
-#'
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 

@@ -18,11 +18,9 @@
 #' (by default), respectively; and (3) uses mean values and instead of median
 #' values (by default).
 #' @return Returns a filtered se object.
-#'
 #' @examples
 #' data(hmel.se)
 #' f_se <- iqrxFilter(se)
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references Jue et al. BMC Genomics 2013 14:150
 

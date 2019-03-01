@@ -5,16 +5,10 @@
 #' @param PLOT Boolean, toggles plotting.
 #' @details This function filters the expression, using
 #' Data Adaptive Flag method.
-#'
-
 #' @return Returns vx[which.min(vv)] to wrapper function.
 #' @examples
-#' library(mclust)
-#' library(edgeR)
 #' data(hmel.se)
 #' f_se <- dafsFilter(se)
-
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references BMC Bioinformatics, 2014, 15:92
 
@@ -64,7 +58,3 @@ abline(v = vx[which.min(vv)], col = "red", lty = 2)
 
 return( vx[which.min(vv)] )
 } # dafsFilter
-
-### SummExp Approved ###
-### SummExp Approved ###
-### SummExp Approved ###

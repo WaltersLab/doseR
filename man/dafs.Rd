@@ -23,11 +23,8 @@ This function filters the expression, using
 Data Adaptive Flag method.
 }
 \examples{
-library(mclust)
-library(edgeR)
 data(hmel.se)
 f_se <- dafsFilter(se)
-
 }
 \references{
 BMC Bioinformatics, 2014, 15:92

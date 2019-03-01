@@ -38,7 +38,6 @@ the supplied se object.
 data(hmel.se)
 test_diffs(se, groupings='annotation.ZA',treatment1="Male",
 treatment2="Female" )
-
 }
 \references{
 The "doseR" package, 2018 (in press).

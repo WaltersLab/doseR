@@ -17,14 +17,10 @@
 #' using ratios of treatment1/treatment2.
 #' @return Returns an invisible data frame containing the x-values and
 #' corresponding density for each applicable annotation column entry.
-
 #' @examples
 #' data(hmel.se)
-
 #' plotRatioDensity(se, groupings='annotation.ZA', treatment1 = 'Male',
 #' treatment2 = 'Female',lty=1,type="l")
-#'
-#'
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).
 
