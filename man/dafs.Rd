@@ -23,6 +23,7 @@ This function filters the expression, using
 Data Adaptive Flag method.
 }
 \examples{
+library(mclust)
 data(hmel.se)
 f_se <- dafsFilter(se)
 }

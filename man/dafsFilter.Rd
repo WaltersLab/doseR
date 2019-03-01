@@ -29,6 +29,7 @@ distribution. The wrapper uses simpleFilter to determine first left-most
 local minima (using the Earth library).
 }
 \examples{
+library(mclust)
 data(hmel.se)
 f_se <- dafsFilter(se)
 }

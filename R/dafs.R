@@ -7,7 +7,9 @@
 #' Data Adaptive Flag method.
 #' @return Returns vx[which.min(vv)] to wrapper function.
 #' @examples
+#' library(mclust)
 #' data(hmel.se)
+#' f_se <- dafsFilter(se)
 #' @author AJ Vaestermark, JR Walters.
 #' @references BMC Bioinformatics, 2014, 15:92
 
