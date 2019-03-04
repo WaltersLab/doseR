@@ -1,11 +1,11 @@
-#' @title dafsFilter Function to filter expression data within an "se" object.
+#' @title dafsFilter Function to filter expression data within an object.
 #' @description This function filters the expression of the supplied
-#' "se" object, by invoking the dafsFilter (dafs) function. dafsFilter is a
+#' object, by invoking the dafsFilter (dafs) function. dafsFilter is a
 #' filtering function used to remove rows (genes) of various expression data.
 #' @usage dafsFilter(se, PLOT=TRUE)
-#' @param se A SummExp object.
+#' @param se A SummarizedExperiment object.
 #' @param PLOT Boolean, toggles plotting.
-#' @details This function filters the expression of the supplied se object
+#' @details This function filters the expression of the supplied object
 #' using a Data Adaptive Flag filter. The internal function uses a vector
 #' to store Kolmogorov Smirnov distance statistics, loops through cuts of
 #' the data to determine targeted K-S statistic, selects data greater than

@@ -1,6 +1,5 @@
 
 library(doseR)
-#library(SummarizedExperiment)
 
 data(hmel.se)
 f_se <- quantFilter(se, lo.bound = 0.4, hi.bound = 0.5)

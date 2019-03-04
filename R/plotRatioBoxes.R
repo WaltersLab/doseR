@@ -1,12 +1,12 @@
 #' @title plotRatioBoxes Function to boxplot density of ratios
 #' between two treatments (using groupings from an annotation column)
-#' within an se object.
+#' within a SummarizedExperiment object.
 #' @description This function plots the expression of the supplied
-#' se object, representing ratios between a pair of selected
+#' object, representing ratios between a pair of selected
 #' treatments as a boxplot for each group in the selected annotation column.
 #' @usage plotRatioBoxes(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 #' mode_mean=TRUE, LOG2=TRUE, ...)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @param groupings A grouping (annotation column), e.g. groupings="something".
 #' @param treatment1 Symbol, treatment 1.
 #' @param treatment2 Symbol, treatment 2.
@@ -14,7 +14,7 @@
 #' @param LOG2 Boolean, Calculate LOG2.
 #' @param ... Passthrough arguments to boxplot (additional arguments
 #' affecting the summary produced).
-#' @details This function boxplots expression of the supplied se
+#' @details This function boxplots expression of the supplied
 #' object using ratios of treatment1/treatment2.
 #' @return Returns an invisible data frame containing the values.
 #' @examples

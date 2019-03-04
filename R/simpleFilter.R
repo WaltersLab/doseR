@@ -1,15 +1,15 @@
-#' @title simpleFilter Function to filter expression data of an se object.
+#' @title simpleFilter Function to filter expression data of an object.
 #' @description simpleFilter is a filtering function used to remove rows
 #' (genes) of various expression data.
 #' @usage simpleFilter(se, mean_cutoff=NULL, min_cutoff=NULL, median_cutoff=
 #' NULL, counts=TRUE)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @param mean_cutoff The lower cutoff, using mean.
 #' @param min_cutoff The cutoff, expressed as a minimum acceptable value.
 #' @param median_cutoff The cutoff, using a median value.
 #' @param counts Boolean, use raw counts data (default) or RPKM.
-#' @details This function filters the expression of the supplied se obj.
-#' @return Returns a filtered se object.
+#' @details This function filters the expression of the supplied obj.
+#' @return Returns a filtered SummarizedExperiment object.
 #' @examples
 #' data(hmel.se) ; f_se <- simpleFilter(se, mean_cutoff=0.5)
 #' @author AJ Vaestermark, JR Walters.

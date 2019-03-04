@@ -1,18 +1,18 @@
-#' @title quantFilter Function to filter expression data of an
-#' se object.
+#' @title quantFilter Function to filter expression data of a
+#' SummarizedExperiment object.
 #' @description This function filters the expression of the supplied
-#' se object; quantFilter is a filtering function used to remove
+#' object; quantFilter is a filtering function used to remove
 #' rows (genes) of various expression data.
 #' @usage quantFilter (se, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
 #' na.rm = TRUE)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @param lo.bound The lower cutoff, expressed as a percentage.
 #' @param hi.bound The upper cutoff, expressed as a percentage.
 #' @param MEDIAN Boolean, Calculate RowMeans or RowMedians.
 #' @param na.rm Boolean, NA removal.
-#' @details This function filters the expression of the supplied se
+#' @details This function filters the expression of the supplied
 #' object, based on a selected percentage cutoff.
-#' @return Returns a filtered se object.
+#' @return Returns a filtered SummarizedExperiment object.
 #' @examples
 #' data(hmel.se)
 #' f_se <- quantFilter(se, lo.bound=0.5)

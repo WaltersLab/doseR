@@ -1,10 +1,10 @@
 #' @title getLibsizes3 Get Lib Sizes.
-#' @description getLibsizes3 method for "SE" class object, derived
+#' @description getLibsizes3 method for SummarizedExp class object, derived
 #' from getLibsizes2
 #' @usage getLibsizes3(se, subset = NULL,
 #' estimationType = c("quantile", "total",
 #' "edgeR"),quantile = 0.75, ...)
-#' @param se An s.e. object.
+#' @param se A SummarizedExperiment object.
 #' @param subset Value
 #' @param estimationType e.g. quantile, total, edgeR.
 #' @param quantile A quantile, expressed as e.g. 0.75.

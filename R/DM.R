@@ -1,10 +1,10 @@
-#' @title se.DM Function to convert se object to LME4 input.
+#' @title se.DM Function to convert SummarizedExperiment object to LME4 input.
 #' @description This function generates LME4 input.
 #' @usage se.DM(se, weightByLL = TRUE)
-#' @param se An se object containing FPKM values and at least
+#' @param se A SummarizedExperiment object containing FPKM values and at least
 #' one annotation column.
 #' @param weightByLL Logical, weigh by log likelihood score.
-#' @details This function converts se object.
+#' @details This function converts SummarizedExperiment object.
 #' @return Returns LME4 input.
 #' @examples
 #' data(hmel.se)
@@ -54,7 +54,7 @@ invisible(dat) }
 #' @title glSeq LME4 wrapper.
 #' @description This function is an LME4 wrapper for dosage analysis.
 #' @usage glSeq(dm, model, ...)
-#' @param dm The dm data. Generally a reformatted se object from se.DM.
+#' @param dm The dm data. Generally a reformatted object from se.DM.
 #' @param model The model. Expressed using standard LME4 syntax, see vignette.
 #' @param ... passthrough arguments.
 #' @details This function is an lme4 wrapper.

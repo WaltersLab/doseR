@@ -7,7 +7,7 @@
 #' @keywords datasets
 #'
 #' @references To demonstrate a typical workflow using doseR, we will use
-#' data from a study in _Heliconius_ butterflies.  _H. melpomene_
+#' data from a study in Heliconius butterflies.  H. melpomene
 #' has 20 autosomes with chromosome 21 being the "Z" sex chromosome.
 #' Like all Lepidoptera, this is a female-heterogametic species, so males
 #' are diploid for the Z while females have a single Z and W chromosomes.

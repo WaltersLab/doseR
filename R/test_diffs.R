@@ -1,23 +1,23 @@
 #' @title test_diffs Statistics function to summarize expression
-#' data of an se object, using ratios between selected treatments.
+#' data of an object, using ratios between selected treatments.
 #' @description generateStats is a summary function used on various
 #' expression data, using ratios between selected treatments.
 #' @usage test_diffs(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 #' mode_mean=TRUE, LOG2=TRUE)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @param groupings A grouping (annotation column); groupings="annotation.ZA".
 #' @param treatment1 Symbol, treatment 1.
 #' @param treatment2 Symbol, treatment 2.
 #' @param mode_mean Boolean, Calculate RowMeans or RowMedians.
 #' @param LOG2 Boolean, Calculate LOG2.
 #' @details This function completes summary statistics of the expression of
-#' the supplied se object.
+#' the supplied SummarizedExperiment object.
 #' @examples
 #' data(hmel.se)
 #' test_diffs(se, groupings='annotation.ZA',treatment1="Male",
 #' treatment2="Female" )
 #' @return Returns an invisible list of summary statistics,
-#' kruskal test and raw data of an se object, using ratios
+#' kruskal test and raw data of an object, using ratios
 #' between selected treatments.
 #' @author AJ Vaestermark, JR Walters.
 #' @references The "doseR" package, 2018 (in press).

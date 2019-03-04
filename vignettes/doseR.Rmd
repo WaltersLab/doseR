@@ -140,7 +140,7 @@ groupings within treatment.
 
 # Example workflow
 To demonstrate a typical workflow using doseR, we will use a subset
-of data from a study in _Heliconius_ butterflies.  _H. melpomene_ 
+of data from a study in Heliconius butterflies.  H. melpomene 
 has 20 autosomes with chromosome 21 being the "Z" sex chromosome.  
 Like all Lepidoptera, this is a female-heterogametic species, so males
 are diploid for the Z while females have a single Z and W chromosomes.
@@ -164,7 +164,7 @@ library(doseR)
 
 ## Example data: _Heliconius_ RNA-seq  
 The primary data used by doseR are read counts from RNA-seq data, 
-in this case generated from legs of _H. melpomene_, with three 
+in this case generated from legs of H. melpomene, with three 
 biological replicates each for male and female. Read count data 
 should be formatted as a matrix, with replicates in columns and 
 transcripts in rows. We also need a vector of corresponding transcript 
@@ -177,11 +177,11 @@ that these data are limited to only one representative transcript per gene).
 data(hmel.data.doser)
 ```
 
-These three data elements are used to populate a new `SE` object, 
+These three data elements are used to populate a new `SummarizedExperiment`, 
 which is the core data structure for the doseR package. This object 
 contains and organizes the read counts, RPKM values, segment lengths, 
 and annotations of gene groupings. However, there are some further data 
-manipulations required before we can create a new `SE` object.  
+manipulations required before we can create a new object.  
 
 First, we need to create a vector indicating to the replicate structure 
 in the data, in this case three male and three female replicates, as 
@@ -205,7 +205,7 @@ annotxn$ZA <- factor(ifelse(hmel.dat$chromosome == 21, "Z", "A"),
 levels = c("A", "Z"))
 ```
 
-Now we are ready to populate a new `SE` object.
+Now we are ready to populate a new `SummarizedExperiment` object.
 
 ```{r}
 
@@ -223,7 +223,7 @@ colData=colData, rowData=rowData)
 ## Normalization & RPKM
 
 Next we select a method for calculating the library size (sometimes 
-called _scaling factors_) so that data are normalized for depth of 
+called scaling factors) so that data are normalized for depth of 
 sequencing. Various methods for calculating a library size are provided, 
 but we will use the most straightforward method of summing total read counts.
 
@@ -233,7 +233,7 @@ estimationType = "total")
 
 ```
 
-With library sizes now stored in the `SE` object, we can calculate
+With library sizes now stored in the `SummExperiment` object, we can calculate
 RPKM values for each locus in each sample and store them in the RPKM slot.
 
 ```{r}
@@ -280,7 +280,7 @@ f_se <- simpleFilter(se, mean_cutoff = 0.01, counts = FALSE)
 
 Having generated filtered RPKM values, we can proceed to comparing 
 distributions of expression among different groupings of genes, as 
-indicated in the annotation slot of the `SE` object. Biological
+indicated in the annotation slot of the `SummExperiment` object. Biological
 replicates are averaged to give a single representative RPKM value per gene. 
 In this case it is clear that the gene expression is reduced on the Z 
 chromosome relative to autosomes in both sexes.
@@ -293,7 +293,7 @@ col=c("grey80","red","grey80","red"), notch=TRUE, ylab = "Log2(RPKM)")
 Beyond visualizing with boxplots, we will also want statistical 
 summaries and tests applied to these data, which can be done with 
 the `generateStats()` function. Here we will want to 
-subset the `SE` object so that tests are applied 
+subset the `SummarizedExperiment` object so that tests are applied 
 using only data from a single treatment. 
 The function returns a list of three items: 
 
@@ -326,8 +326,8 @@ clusterby_grouping = TRUE )
 
 ## Comparing relative expression
 
-Similarly to the plots and statistics given above for _absolute_ expression, 
-doseR provides functions for examing _relative_ expression between pairs of 
+Similarly to the plots and statistics given above for absolute expression, 
+doseR provides functions for examing relative expression between pairs of 
 treatments. For instance, we may want to assess whether there is a dosage 
 effect on gene expression for the Z chromosome. This would manifest as a 
 positive shift in the distribution of Male:Female expression levels on the 
@@ -394,6 +394,6 @@ particular? Because the Kruskal-Wallis test is a "global" test for
 inequality among groups (analogous to an ANOVA), you may want to apply 
 a follow-up non-parametric post-hoc test for specific pairwise comparisons
 after a significant Kruskal-Wallis test. Several such tests, such as the 
-[_Nemenyi_](https://en.wikipedia.org/wiki/Nemenyi_test), are implemented 
+[Nemenyi](https://en.wikipedia.org/wiki/Nemenyi_test), are implemented 
 in the [PMCMRplus]
 (https://cran.r-project.org/web/packages/PMCMRplus/index.html) package.

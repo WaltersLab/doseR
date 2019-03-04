@@ -1,8 +1,8 @@
 #' @title make_RPKM Make RPKM.
-#' @description make_RPKM populates RPKM slot of se
+#' @description make_RPKM populates RPKM slot of SummarizedExperiment
 #' S4 object.
 #' @usage make_RPKM(se)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @return RPKM populated object
 #' @examples
 #' data(hmel.se)

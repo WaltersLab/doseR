@@ -4,20 +4,20 @@
 #' object. iqrxFilter is a filtering function used to remove rows (genes) of
 #' various expression data.
 #' @usage iqrxFilter(se, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
-#' @param se An s.e. object.
+#' @param se A SummarizedExperiment object.
 #' @param iqr_multi Numeric multiplier; removes any outliers that are iqr_multi
 #'  times the mid-50 percentile distance greater or less than the 25th and 75th
 #'  percentiles, by default
 #' @param MEDIAN Boolean, Calculate RowMeans or RowMedians.
 #' @param na.rm Boolean, NA removal.
-#' @details This function filters the expression of the supplied se object,
+#' @details This function filters the expression of the supplied object,
 #' based on a selected percentage cutoff and selected interquartile range
 #' multiplier. The function iqrxFilter will: 1) log-base two transform all RPKM
 #' values (obligatory); (2) remove any outliers that were 1.5 times the mid-50
 #' percentile distance greater or less than the 75th and 25th percentiles
 #' (by default), respectively; and (3) uses mean values and instead of median
 #' values (by default).
-#' @return Returns a filtered se object.
+#' @return Returns a filtered SummarizedExperiment object.
 #' @examples
 #' data(hmel.se)
 #' f_se <- iqrxFilter(se)

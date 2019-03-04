@@ -3,7 +3,7 @@
 #' @description generateStats is a summary function used on various
 #' expression data.
 #' @usage generateStats(se, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
-#' @param se An s.e. object.
+#' @param se A SummarizedExperiment object.
 #' @param groupings A grouping (annotation column), e.g. groupings="something".
 #' @param mode_mean Boolean, Calculate RowMeans or RowMedians.
 #' @param LOG2 Boolean, Calculate LOG2.

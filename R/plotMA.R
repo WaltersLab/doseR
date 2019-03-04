@@ -2,14 +2,14 @@
 #' @description This function generates MA plot.
 #' @usage plotMA.se(se, samplesA, samplesB, scale = NULL,
 #' xlab = 'A', ylab = 'M', ...)
-#' @param se An se object.
+#' @param se A SummarizedExperiment object.
 #' @param samplesA Either a character vector, identifying sample
 #' set A by either replicate name or sample name, or a numerical
-#' vector giving the columns of data in the 'se' object that
+#' vector giving the columns of data in the object that
 #' forms sample set A.
 #' @param samplesB Either a character vector, identifying sample
 #' set B by either replicate name or sample name, or a numerical
-#' vector giving the columns of data in the 'se' object that
+#' vector giving the columns of data in the object that
 #' forms sample set B.
 #' @param scale If given, defines the scale on which the log-ratios
 #' will be plotted.
@@ -17,7 +17,7 @@
 #' @param ylab Label for the Y-axis. Defaults to 'M'.
 #' @param ... Any other parameters to be passed to the plot
 #' function.
-#' @details This function makes MA plot from se object.
+#' @details This function makes MA plot from SummExperiment object.
 #' @return Returns MA plot.
 #' @examples
 #' data(hmel.se)
