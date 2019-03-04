@@ -2,13 +2,13 @@
 % Please edit documentation in R/simpleFilter.R
 \name{simpleFilter}
 \alias{simpleFilter}
-\title{simpleFilter Function to filter expression data of an se object.}
+\title{simpleFilter Function to filter expression data of an object.}
 \usage{
 simpleFilter(se, mean_cutoff=NULL, min_cutoff=NULL, median_cutoff=
 NULL, counts=TRUE)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{mean_cutoff}{The lower cutoff, using mean.}
 
@@ -19,14 +19,14 @@ NULL, counts=TRUE)
 \item{counts}{Boolean, use raw counts data (default) or RPKM.}
 }
 \value{
-Returns a filtered se object.
+Returns a filtered SummarizedExperiment object.
 }
 \description{
 simpleFilter is a filtering function used to remove rows
 (genes) of various expression data.
 }
 \details{
-This function filters the expression of the supplied se obj.
+This function filters the expression of the supplied obj.
 }
 \examples{
 data(hmel.se) ; f_se <- simpleFilter(se, mean_cutoff=0.5)

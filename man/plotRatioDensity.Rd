@@ -3,14 +3,14 @@
 \name{plotRatioDensity}
 \alias{plotRatioDensity}
 \title{plotRatioDensity Function to plot density of ratios between two
-treatments (using groupings from an annotation column) within an se
+treatments (using groupings from an annotation column) within an
 object.}
 \usage{
 plotRatioDensity(se, groupings= NULL, treatment1=NULL,
 treatment2=NULL, mode_mean=TRUE, LOG2=TRUE,...)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{groupings}{A grouping (annotation); groupings="annotation.ZA"}
 
@@ -30,11 +30,11 @@ Returns an invisible data frame containing the x-values and
 corresponding density for each applicable annotation column entry.
 }
 \description{
-This function plots the expression of the supplied se
+This function plots the expression of the supplied
 object, using ratios between a pair of selected treatments.
 }
 \details{
-This function plots expression of the supplied se object
+This function plots expression of the supplied object
 using ratios of treatment1/treatment2.
 }
 \examples{

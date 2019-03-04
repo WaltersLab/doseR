@@ -2,14 +2,14 @@
 % Please edit documentation in R/quantFilter.R
 \name{quantFilter}
 \alias{quantFilter}
-\title{quantFilter Function to filter expression data of an
-se object.}
+\title{quantFilter Function to filter expression data of a
+SummarizedExperiment object.}
 \usage{
 quantFilter (se, lo.bound=.25, hi.bound=.75, MEDIAN = FALSE,
 na.rm = TRUE)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{lo.bound}{The lower cutoff, expressed as a percentage.}
 
@@ -20,15 +20,15 @@ na.rm = TRUE)
 \item{na.rm}{Boolean, NA removal.}
 }
 \value{
-Returns a filtered se object.
+Returns a filtered SummarizedExperiment object.
 }
 \description{
 This function filters the expression of the supplied
-se object; quantFilter is a filtering function used to remove
+object; quantFilter is a filtering function used to remove
 rows (genes) of various expression data.
 }
 \details{
-This function filters the expression of the supplied se
+This function filters the expression of the supplied
 object, based on a selected percentage cutoff.
 }
 \examples{

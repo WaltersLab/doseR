@@ -8,7 +8,7 @@ object.}
 iqrxFilter(se, iqr_multi = 1.5, MEDIAN = FALSE, na.rm = TRUE)
 }
 \arguments{
-\item{se}{An s.e. object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{iqr_multi}{Numeric multiplier; removes any outliers that are iqr_multi
 times the mid-50 percentile distance greater or less than the 25th and 75th
@@ -19,7 +19,7 @@ percentiles, by default}
 \item{na.rm}{Boolean, NA removal.}
 }
 \value{
-Returns a filtered se object.
+Returns a filtered SummarizedExperiment object.
 }
 \description{
 This function filters the expression of the supplied se
@@ -27,7 +27,7 @@ object. iqrxFilter is a filtering function used to remove rows (genes) of
 various expression data.
 }
 \details{
-This function filters the expression of the supplied se object,
+This function filters the expression of the supplied object,
 based on a selected percentage cutoff and selected interquartile range
 multiplier. The function iqrxFilter will: 1) log-base two transform all RPKM
 values (obligatory); (2) remove any outliers that were 1.5 times the mid-50

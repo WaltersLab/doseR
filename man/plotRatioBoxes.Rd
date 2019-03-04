@@ -4,13 +4,13 @@
 \alias{plotRatioBoxes}
 \title{plotRatioBoxes Function to boxplot density of ratios
 between two treatments (using groupings from an annotation column)
-within an se object.}
+within a SummarizedExperiment object.}
 \usage{
 plotRatioBoxes(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 mode_mean=TRUE, LOG2=TRUE, ...)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{groupings}{A grouping (annotation column), e.g. groupings="something".}
 
@@ -30,11 +30,11 @@ Returns an invisible data frame containing the values.
 }
 \description{
 This function plots the expression of the supplied
-se object, representing ratios between a pair of selected
+object, representing ratios between a pair of selected
 treatments as a boxplot for each group in the selected annotation column.
 }
 \details{
-This function boxplots expression of the supplied se
+This function boxplots expression of the supplied
 object using ratios of treatment1/treatment2.
 }
 \examples{

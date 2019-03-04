@@ -9,7 +9,7 @@ estimationType = c("quantile", "total",
 "edgeR"),quantile = 0.75, ...)
 }
 \arguments{
-\item{se}{An s.e. object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{subset}{Value}
 
@@ -23,7 +23,7 @@ estimationType = c("quantile", "total",
 Libsize value
 }
 \description{
-getLibsizes3 method for "SE" class object, derived
+getLibsizes3 method for SummarizedExp class object, derived
 from getLibsizes2
 }
 \examples{

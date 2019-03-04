@@ -2,15 +2,15 @@
 % Please edit documentation in R/plotExpr.R
 \name{plotExpr}
 \alias{plotExpr}
-\title{plotExpr Function to generate a boxplot (expression) for an
-se object based on the replicate data.}
+\title{plotExpr Function to generate a boxplot (expression) for a
+SummarizedExperiment object based on the replicate data.}
 \usage{
 plotExpr(se, groupings= NULL, mode_mean=TRUE,
 treatment=levels(colData(se)$Treatment),
 LOG2=TRUE, clusterby_grouping=TRUE, ...)
 }
 \arguments{
-\item{se}{An se object containing FPKM values and at least
+\item{se}{A SummarizedExp object containing FPKM values and at least
 one annotation column.}
 
 \item{groupings}{Specifies which column in the dataframe of the
@@ -43,19 +43,19 @@ and labels used to generate the figure.
 }
 \description{
 This function generates a boxplot of FPKM expression
-values from the supplied se object. FPKM values are averaged
+values from the supplied object. FPKM values are averaged
 across replicates and partitioned among groups of loci as specified
-in a selected column from the annotation slot of the provided se
+in a selected column from the annotation slot of the provided
 object.
 }
 \details{
 This function generates boxplots to visualize the distribution
-of FPKM expression values provided in an se object, arranged by
+of FPKM expression values provided in an object, arranged by
 selected treatments and locus annotations. FPKM values are averaged
 (mean or median) within selected treatments, to provide a single
 expression value per locus per treatment. Loci are partitioned
 into groupings based on a specified column in the dataframe of
-annotations slot of the se object. Thus a box is drawn for
+annotations slot of the object. Thus a box is drawn for
 each grouping of loci for each treatment indicated. Desired treatments
 and their ordering are specified by the treatment argument. Groupings
 are arranged by sort order of the annotation column indicated, and can

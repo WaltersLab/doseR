@@ -7,13 +7,13 @@
 make_RPKM(se)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 }
 \value{
 RPKM populated object
 }
 \description{
-make_RPKM populates RPKM slot of se
+make_RPKM populates RPKM slot of SummarizedExperiment
 S4 object.
 }
 \examples{

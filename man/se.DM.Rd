@@ -2,12 +2,12 @@
 % Please edit documentation in R/DM.R
 \name{se.DM}
 \alias{se.DM}
-\title{se.DM Function to convert se object to LME4 input.}
+\title{se.DM Function to convert SummarizedExperiment object to LME4 input.}
 \usage{
 se.DM(se, weightByLL = TRUE)
 }
 \arguments{
-\item{se}{An se object containing FPKM values and at least
+\item{se}{A SummarizedExperiment object containing FPKM values and at least
 one annotation column.}
 
 \item{weightByLL}{Logical, weigh by log likelihood score.}
@@ -19,7 +19,7 @@ Returns LME4 input.
 This function generates LME4 input.
 }
 \details{
-This function converts se object.
+This function converts SummarizedExperiment object.
 }
 \examples{
 data(hmel.se)

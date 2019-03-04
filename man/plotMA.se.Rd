@@ -8,16 +8,16 @@ plotMA.se(se, samplesA, samplesB, scale = NULL,
 xlab = 'A', ylab = 'M', ...)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{samplesA}{Either a character vector, identifying sample
 set A by either replicate name or sample name, or a numerical
-vector giving the columns of data in the 'se' object that
+vector giving the columns of data in the object that
 forms sample set A.}
 
 \item{samplesB}{Either a character vector, identifying sample
 set B by either replicate name or sample name, or a numerical
-vector giving the columns of data in the 'se' object that
+vector giving the columns of data in the object that
 forms sample set B.}
 
 \item{scale}{If given, defines the scale on which the log-ratios
@@ -37,7 +37,7 @@ Returns MA plot.
 This function generates MA plot.
 }
 \details{
-This function makes MA plot from se object.
+This function makes MA plot from SummExperiment object.
 }
 \examples{
 data(hmel.se)

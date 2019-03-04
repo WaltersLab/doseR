@@ -7,7 +7,7 @@
 glSeq(dm, model, ...)
 }
 \arguments{
-\item{dm}{The dm data. Generally a reformatted se object from se.DM.}
+\item{dm}{The dm data. Generally a reformatted object from se.DM.}
 
 \item{model}{The model. Expressed using standard LME4 syntax, see vignette.}
 

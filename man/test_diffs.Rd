@@ -3,13 +3,13 @@
 \name{test_diffs}
 \alias{test_diffs}
 \title{test_diffs Statistics function to summarize expression
-data of an se object, using ratios between selected treatments.}
+data of an object, using ratios between selected treatments.}
 \usage{
 test_diffs(se, groupings= NULL, treatment1=NULL, treatment2=NULL,
 mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
-\item{se}{An se object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{groupings}{A grouping (annotation column); groupings="annotation.ZA".}
 
@@ -23,7 +23,7 @@ mode_mean=TRUE, LOG2=TRUE)
 }
 \value{
 Returns an invisible list of summary statistics,
-kruskal test and raw data of an se object, using ratios
+kruskal test and raw data of an object, using ratios
 between selected treatments.
 }
 \description{
@@ -32,7 +32,7 @@ expression data, using ratios between selected treatments.
 }
 \details{
 This function completes summary statistics of the expression of
-the supplied se object.
+the supplied SummarizedExperiment object.
 }
 \examples{
 data(hmel.se)

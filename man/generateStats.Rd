@@ -8,7 +8,7 @@ data of an s.e. object.}
 generateStats(se, groupings= NULL, mode_mean=TRUE, LOG2=TRUE)
 }
 \arguments{
-\item{se}{An s.e. object.}
+\item{se}{A SummarizedExperiment object.}
 
 \item{groupings}{A grouping (annotation column), e.g. groupings="something".}
 
