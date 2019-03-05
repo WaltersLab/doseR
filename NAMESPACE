@@ -4,7 +4,7 @@ import("digest")
 export('getLibsizes3',  'make_RPKM', 'plotMA.se', 'dafsFilter',
 'quantFilter', 'test_diffs', 'plotRatioBoxes', 'plotRatioDensity',
 'se.DM', 'glSeq', 'generateStats', 'iqrxFilter', 'plotExpr',
-'simpleFilter', 'SummarizedExperiment', 'colData')
+'simpleFilter')
 importFrom("graphics", "boxplot", "lines", "matplot", "plot")
 importFrom("methods", "callNextMethod", "new")
 importFrom("stats", "density", "kruskal.test", "ks.test", "median",

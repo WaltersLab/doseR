@@ -160,6 +160,7 @@ Once installed, you must load the package.
 
 ```{r}
 library(doseR)
+library(SummarizedExperiment)
 ```
 
 ## Example data: _Heliconius_ RNA-seq  
