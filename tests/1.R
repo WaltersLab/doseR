@@ -1,10 +1,8 @@
+library(Zwyx)
 
-library(doseR)
+data(G.RESULT)
+temp <- countMedian(scaffolds='DPSCF300112', Sample=1, G_RESULT)
 
-data(hmel.se)
-f_se <- quantFilter(se, lo.bound = 0.4, hi.bound = 0.5)
-dm <- se.DM(f_se)
-temp <- glSeq(dm, "-1 + replicate")
+RUnit::checkEqualsNumeric(temp, 117)
 
-RUnit::checkEqualsNumeric(round(temp@optinfo$val[4], 1), round(6.008, 1))
-RUnit::checkEqualsNumeric(round(temp@optinfo$val[5], 1), round(5.840, 1))
+
