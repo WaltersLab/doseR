@@ -1,15 +1,15 @@
-\name{Zwyx}
-\title{News for Package \pkg{Zwyx}}
+\name{doseR}
+\title{News for Package \pkg{doseR}}
 
-\section{Changes in version 0.99.1}{
+\section{Changes in version 0.99.5}{
   \itemize{
     \item Resolved biocCheck errors, warnings and notes.
-    \item Completed data integration.
+    \item Completed SummarizedExperiment integration.
 
   }
 }
 
 \description{
-  NEWS file for Zwyx
+NEWS file for doseR
 
 }

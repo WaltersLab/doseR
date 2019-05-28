@@ -1,17 +1,18 @@
-Package: Zwyx
+Package: doseR
 Type: Package
-Title: Zwyx
-Version: 0.99.1
+Title: doseR
+Version: 0.99.15
 Author: AJ Vaestermark, JR Walters.
-Maintainer: ake.vastermark  <ake.vastermark@gmail.com>
-Description: Zwyx package is a next generation sequencing package for sex chromosome scaffold mismatch analysis.
+Maintainer: ake.vastermark <ake.vastermark@gmail.com>
+Description: doseR package is a next generation sequencing package for sex chromosome dosage compensation which can be applied broadly to detect shifts in gene expression among an arbitrary number of pre-defined groups of loci. doseR is a differential gene expression package for count data, that detects directional shifts in expression for multiple, specific subsets of genes, broad utility in systems biology research. doseR has been prepared to manage the nature of the data and the desired set of inferences. doseR uses S4 classes to store count data from sequencing experiment. It contains functions to normalize and filter count data, as well as to plot and calculate statistics of count data. It contains a framework for linear modeling of count data. The package has been tested using real and simulated data.
 License: GPL
-Imports: stringr, txtplot, RUnit, Rsamtools, parallel, changepoint, cn.mops, doParallel, foreach, iterators
 Encoding: UTF-8
+RoxygenNote: 6.1.1
+Imports: edgeR, methods, stats, graphics, matrixStats, mclust, lme4, RUnit, SummarizedExperiment, digest, S4Vectors
 Suggests: 
+    BiocStyle,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-biocViews: 	Infrastructure, Software, DataRepresentation
-RoxygenNote: 6.1.1
-Depends: R (>= 3.3.0)
+biocViews: 	Infrastructure, Software, DataRepresentation, Sequencing, GeneExpression, SystemsBiology, DifferentialExpression
+Depends: R (>= 3.6)

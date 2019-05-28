@@ -1,11 +1,15 @@
-import("stringr", "txtplot")
-importFrom("stats", "median")
-    importFrom("utils", "setTxtProgressBar", "txtProgressBar")
- importFrom("utils", "data")
-export('countMedian', 'plotMedianReadCounts', 'countReadsMara2', 'scaffoldMeanRatios', 'ratiosCorrelation', 'countReadsMara3', 'countReadsMara', 'countCpt', 'findChimericScaffold')
-import("RUnit", "Rsamtools", "changepoint")
-#importFrom("doParallel", "%dopar%", "foreach")
-#importFrom("foreach","%dopar%")
-#importFrom(foreach,"%dopar%")
-importFrom("utils", "globalVariables")
-import("foreach", "iterators", "parallel")
+import("SummarizedExperiment")
+importFrom("S4Vectors", "DataFrame") # new
+import("digest")
+export('getLibsizes3',  'make_RPKM', 'plotMA.se', 'dafsFilter',
+'quantFilter', 'test_diffs', 'plotRatioBoxes', 'plotRatioDensity',
+'se.DM', 'glSeq', 'generateStats', 'iqrxFilter', 'plotExpr',
+'simpleFilter')
+importFrom("graphics", "boxplot", "lines", "matplot", "plot")
+importFrom("methods", "callNextMethod", "new")
+importFrom("stats", "density", "kruskal.test", "ks.test", "median",
+"na.omit", "quantile")
+importFrom("graphics", "abline", "legend")
+importFrom("stats", "formula", "poisson")
+importFrom("graphics", "axTicks", "axis")
+import("RUnit")
