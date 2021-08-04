@@ -9,17 +9,17 @@ The software is currently in early stages of development and not yet ready for p
 * [Walters, J.R., Hardcastle, T.J. & Jiggins, C.D. (2015). Sex Chromosome Dosage Compensation in Heliconius Butterflies: Global yet Still Incomplete? Genome Biology and Evolution, 7, 2545–2559.](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4607515/)
 * [Hardcastle, T.J. & Lewsey, M.G. (2016). Mobile small RNAs and their role in regulating cytosine methylation of DNA. RNA Biology, Vol 13, Issue 11.](http://www.tandfonline.com/doi/abs/10.1080/15476286.2016.1218591)
 
-## Initial Package Released
+### Initial Package Released
 
 We have released an initial version of [doseR via BioConductor](https://bioconductor.org/packages/release/bioc/html/doseR.html). Currently it implements a variety of functions for visualization and non-parametric statistics traditionally used for Dosage Compensation analysis, such as outlined the review by [Gu and Walters (2017)](https://academic.oup.com/gbe/article/9/9/2461/4092962) 
 
-## Seeking bioinformatics programmer (July 2021)
+### Seeking bioinformatics programmer (July 2021)
 
-We seek to identify a new team member to work as a programmer to support further project development. This is a "consultant" position, with work to be performed remotely for a set fee. It is not full-time or part-time employment. We seek to identify an individual with expertise in R programming, Bioconductor package development, RNA-seq analysis, and linear modeling who can take on the primary task of implementing package code in collaboration with the project lead investigators. We anticipate compensation will be in the range of $2k-10k depending on extent of involvement. Authorship on packages and publications is also anticipated.
+We seek to identify a new team member to work as a programmer to support further project development. This is a "contractor" position, with work to be performed remotely for a set fee. It is not full-time or part-time employment. We seek to identify an individual with expertise in R programming, Bioconductor package development, RNA-seq analysis, and linear modeling who can take on the primary task of implementing package code in collaboration with the project lead investigators. We anticipate compensation will be in the range of $2k-10k depending on extent of involvement. Authorship on packages and publications is also anticipated.
 
 For further information and to express interest in this opportunity, please contact [James Walters](https://eeb.ku.edu/james-r-walters) with a CV and brief letter of introduction.
 
-### NSF project summary
+## NSF project summary
 
 #### Overview
 This research aims to develop and make broadly available a novel linear-modeling statistical methodology for analyzing sex chromosome dosage compensation using genome-wide RNA-seq expression data. Performance of the new statistical model and its software implementation relative to previous methods of assessing dosage compensation will be evaluated through extensive simulations of RNA-sequencing data. Application to specific empirical data sets relevant to dosage compensation will also be examined and evaluated. The software implementation, named doseR, will be written in the R statistical programming language and distributed as part of the Bioconductor suite of bioinformatic software tools. 
