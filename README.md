@@ -3,12 +3,21 @@
 
 *doseR* is bioinformatics software primarily designed for analysis of sex chromosome dosage compensation using RNA-seq data. However, the software package and underlying statistical framework can be applied broadly to detect shifts in gene expression among an arbitray number of pre-defined groups of loci.
 
-The *doseR* package, implemented in R as part of the bioconductor project, is being developed in the [Walters Lab](http://walterslab.org/) at the University of Kansas. The project is funded by the National Science Foundation (ABI-1661454, beginning September, 2017). The work will be done in close collaboration with [Thomas Hardcastle](http://people.ds.cam.ac.uk/tjh48/) at the University of Cambridge. 
+The *doseR* package, implemented in R as part of the bioconductor project, is being developed in the [Walters Lab](http://walterslab.org/) at the University of Kansas. The project is funded by the National Science Foundation (ABI-1661454, beginning September, 2017). The work will be done in close collaboration with [Thomas Hardcastle](https://www.researchgate.net/profile/Thomas-Hardcastle) at the University of Cambridge. 
 
 The software is currently in early stages of development and not yet ready for public release. Examples of the underlying principle can be found in the following publications:
 * [Walters, J.R., Hardcastle, T.J. & Jiggins, C.D. (2015). Sex Chromosome Dosage Compensation in Heliconius Butterflies: Global yet Still Incomplete? Genome Biology and Evolution, 7, 2545–2559.](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4607515/)
 * [Hardcastle, T.J. & Lewsey, M.G. (2016). Mobile small RNAs and their role in regulating cytosine methylation of DNA. RNA Biology, Vol 13, Issue 11.](http://www.tandfonline.com/doi/abs/10.1080/15476286.2016.1218591)
 
+## Initial Package Released
+
+We have released an initial version of [doseR via BioConductor](https://bioconductor.org/packages/release/bioc/html/doseR.html). Currently it implements a variety of functions for visualization and non-parametric statistics traditionally used for Dosage Compensation analysis, such as outlined the review by [Gu and Walters (2017)](https://academic.oup.com/gbe/article/9/9/2461/4092962) 
+
+## Seeking bioinformatics programmer (July 2021)
+
+We seek to identify a new team member to work as a programmer to support further project development. This is a "consultant" position, with work to be performed remotely for a set fee. It is not full-time or part-time employment. We seek to identify an individual with expertise in R programming, Bioconductor package development, RNA-seq analysis, and linear modeling who can take on the primary task of implementing package code in collaboration with the project lead investigators. We anticipate compensation will be in the range of $2k-10k depending on extent of involvement. Authorship on packages and publications is also anticipated.
+
+For further information and to express interest in this opportunity, please contact [James Walters](https://eeb.ku.edu/james-r-walters) with a CV and brief letter of introduction.
 
 ### NSF project summary
 
